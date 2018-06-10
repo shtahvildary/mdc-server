@@ -1,0 +1,21 @@
+/**
+ *          .::SWITCH ROUTES::.
+ * All Switch's apis are routed here.
+ * 
+ */
+const routes = express.Router();
+
+import Auth from '../middlewares/Auth';
+import { newSwitch ,allSwitches} from '../controllers/SwitchesController'
+
+
+//ENDPOINTS
+routes.post('/new',Auth, newSwitch);
+routes.post('/all',Auth, allSwitches);
+
+
+
+
+
+
+export default routes;
