@@ -10,6 +10,6 @@ import {newLink,allLinks} from '../controllers/LinksController';
 
 //ENDPOINTS
 routes.post('/new',Auth,newLink);
-routes.post('/all',allLinks);
+routes.post('/all',Auth,allLinks);
 
 export default routes;

@@ -10,6 +10,6 @@ import {newLocation,allLocations} from '../controllers/LocationController';
 
 //ENDPOINTS
 routes.post('/new',Auth,newLocation);
-routes.post('/all',allLocations);
+routes.post('/all',Auth,allLocations);
 
 export default routes;

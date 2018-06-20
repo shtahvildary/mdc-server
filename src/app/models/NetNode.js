@@ -1,7 +1,7 @@
 
 var netNodeSchema=mongoose.Schema({
     patchPanelPort:{type:'string'},
-    cabelNumber:{type:'string'},
+    cableNumber:{type:'string'},
     // switchName:{}
     switchId:{type:mongoose.SchemaTypes.ObjectId,ref:'Switch'},
     switchPort:{type:'string'},

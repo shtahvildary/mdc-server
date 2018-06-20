@@ -10,6 +10,6 @@ import {newVlan,allVlans} from '../controllers/vlanController';
 
 //ENDPOINTS
 routes.post('/new',Auth,newVlan);
-routes.post('/all',allVlans);
+routes.post('/all',Auth,allVlans);
 
 export default routes;

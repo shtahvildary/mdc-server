@@ -10,6 +10,6 @@ import {newNetNode,allNetNodes} from '../controllers/netNodeController';
 
 //ENDPOINTS
 routes.post('/new',Auth,newNetNode);
-routes.post('/all',allNetNodes);
+routes.post('/all',Auth,allNetNodes);
 
 export default routes;
