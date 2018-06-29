@@ -19,7 +19,11 @@ export let newNetNode=async(req,res)=>{
 /*          POST /api/netnodes/all            */
 export let allNetNodes=async(req,res)=>{
     try{
-        var netNodes= await NetNode.find({});
+        var netNodes= await NetNode.find({},{_id:0}).
+        populate({path:"switchId",select:"name"})
+        .populate({path:"vlan",select:"name"})
+        .populate({path:"device",select:"name"})
+        .populate({path:"location",select:"name"});
         return res.validSend(200,{netNodes});
     }catch(e){
         console.error(e);

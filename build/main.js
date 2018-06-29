@@ -1687,7 +1687,7 @@ var allNetNodes = function () {
                     case 0:
                         _context2.prev = 0;
                         _context2.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__models_NetNode__["a" /* default */].find({});
+                        return __WEBPACK_IMPORTED_MODULE_1__models_NetNode__["a" /* default */].find({}, { _id: 0 }).populate({ path: "switchId", select: "name" }).populate({ path: "vlan", select: "name" }).populate({ path: "device", select: "name" }).populate({ path: "location", select: "name" });
 
                     case 3:
                         netNodes = _context2.sent;
@@ -1728,7 +1728,7 @@ var netNodeSchema = mongoose.Schema({
     vlan: { type: mongoose.SchemaTypes.ObjectId, ref: 'Vlan' },
     device: { type: mongoose.SchemaTypes.ObjectId, ref: 'Device' }, //wifi,pc,inrow, accsess door, camera,server... pc is not in Device schema, so if this field is null, it means that it's a pc
     description: { type: 'string' },
-    location: { type: mongoose.SchemaTypes.ObjectId, ref: 'location' }
+    location: { type: mongoose.SchemaTypes.ObjectId, ref: 'Location' }
 
 });
 netNodeSchema.plugin(mongooseTimestamp);
