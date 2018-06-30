@@ -1680,7 +1680,7 @@ var newNetNode = function () {
 /*          POST /api/netnodes/all            */
 var allNetNodes = function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
-        var netNodes;
+        var netNodes, data, finalResult;
         return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -1691,21 +1691,49 @@ var allNetNodes = function () {
 
                     case 3:
                         netNodes = _context2.sent;
-                        return _context2.abrupt("return", res.validSend(200, { netNodes: netNodes }));
 
-                    case 7:
-                        _context2.prev = 7;
+                        console.plain(netNodes);
+                        data = [];
+
+                        netNodes.map(function (n) {
+                            console.plain("n: ", n);
+                            data.push({
+                                location: n.location.name,
+                                switch: n.switchId.name,
+                                switchPort: n.switchPort,
+                                cabelNumber: n.cabelNumber,
+                                patchPanelPort: n.patchPanelPort
+                            });
+                        });
+                        // vlan:n.vlan.name,
+                        // device:n.device.name
+
+                        finalResult = { columns: {
+                                location: "مکان",
+                                switchId: "سوییچ",
+                                switchPort: "شماره پورت سوییچ",
+                                cabelNumber: "شماره کابل",
+                                patchPanelPort: "شماره patch panel",
+                                vlan: "شبکه مجازی",
+                                device: "نوع"
+                            },
+                            netNodesData: data
+                        };
+                        return _context2.abrupt("return", res.validSend(200, { netNodes: finalResult }));
+
+                    case 11:
+                        _context2.prev = 11;
                         _context2.t0 = _context2["catch"](0);
 
                         console.error(_context2.t0);
                         return _context2.abrupt("return", res.validSend(500, { error: _context2.t0 }));
 
-                    case 11:
+                    case 15:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, _this, [[0, 7]]);
+        }, _callee2, _this, [[0, 11]]);
     }));
 
     return function allNetNodes(_x3, _x4) {

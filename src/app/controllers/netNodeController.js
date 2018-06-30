@@ -24,7 +24,36 @@ export let allNetNodes=async(req,res)=>{
         .populate({path:"vlan",select:"name"})
         .populate({path:"device",select:"name"})
         .populate({path:"location",select:"name"});
-        return res.validSend(200,{netNodes});
+        console.plain(netNodes)
+        var data=[]
+        netNodes.map(n=>{
+            console.plain("n: ",n)
+            data.push({  
+                location:n.location.name,
+                switch:n.switchId.name,
+                switchPort:n.switchPort,
+                cabelNumber:n.cabelNumber,
+                patchPanelPort:n.patchPanelPort,
+            })
+            
+            
+            
+        })
+        // vlan:n.vlan.name,
+        // device:n.device.name
+
+        var finalResult={columns:{
+            location: "مکان",
+            switchId: "سوییچ",
+            switchPort: "شماره پورت سوییچ",
+            cabelNumber: "شماره کابل",
+            patchPanelPort: "شماره patch panel",
+            vlan:"شبکه مجازی",
+            device:"نوع"
+          },
+        netNodesData:data
+          }
+        return res.validSend(200,{netNodes:finalResult});
     }catch(e){
         console.error(e);
         return res.validSend(500,{error:e});
