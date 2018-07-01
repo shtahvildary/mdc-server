@@ -5,7 +5,7 @@ var switchSchema = mongoose.Schema({
   description:{type:'string'},
   model:{type:'string'}, 
   diagramUrl:{type:'string'},
-  location:{type:mongoose.SchemaTypes.ObjectId,ref:'location'},
+  location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
 
 
 });

@@ -1249,32 +1249,57 @@ var newSwitch = function () {
 /*          POST /api/switches/all            */
 var allSwitches = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
-        var swList;
+        var swList, data, finalResult;
         return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         _context2.prev = 0;
                         _context2.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__models_Switch__["a" /* default */].find({});
+                        return __WEBPACK_IMPORTED_MODULE_1__models_Switch__["a" /* default */].find({}).populate({ path: "location", select: "name" });
 
                     case 3:
                         swList = _context2.sent;
-                        return _context2.abrupt("return", res.validSend(200, { switches: swList }));
+                        data = [];
 
-                    case 7:
-                        _context2.prev = 7;
+                        swList.map(function (n) {
+                            data.push({
+                                name: n.name,
+                                ip: n.ip,
+                                description: n.description,
+                                model: n.model,
+                                diagramUrl: n.diagramUrl,
+                                location: n.location.name
+
+                            });
+                        });
+
+                        finalResult = { columns: {
+                                name: "نام",
+                                ip: "آدرس",
+                                description: "توضیحات",
+                                model: "مدل",
+                                diagramUrl: "نمودار",
+                                location: "مکان"
+
+                            },
+                            switchesData: data
+                        };
+                        return _context2.abrupt("return", res.validSend(200, { switches: finalResult }));
+
+                    case 10:
+                        _context2.prev = 10;
                         _context2.t0 = _context2["catch"](0);
 
                         console.error(_context2.t0);
                         return _context2.abrupt("return", res.validSend(500, { error: _context2.t0 }));
 
-                    case 11:
+                    case 14:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, _this, [[0, 7]]);
+        }, _callee2, _this, [[0, 10]]);
     }));
 
     return function allSwitches(_x3, _x4) {
@@ -1294,7 +1319,7 @@ var switchSchema = mongoose.Schema({
   description: { type: 'string' },
   model: { type: 'string' },
   diagramUrl: { type: 'string' },
-  location: { type: mongoose.SchemaTypes.ObjectId, ref: 'location' }
+  location: { type: mongoose.SchemaTypes.ObjectId, ref: 'Location' }
 
 });
 switchSchema.plugin(mongooseTimestamp);
@@ -1692,7 +1717,7 @@ var allNetNodes = function () {
                     case 3:
                         netNodes = _context2.sent;
 
-                        console.plain(netNodes);
+                        // console.plain(netNodes)
                         data = [];
 
                         netNodes.map(function (n) {
@@ -1701,18 +1726,18 @@ var allNetNodes = function () {
                                 location: n.location.name,
                                 switch: n.switchId.name,
                                 switchPort: n.switchPort,
-                                cabelNumber: n.cabelNumber,
-                                patchPanelPort: n.patchPanelPort
+                                cableNumber: n.cableNumber,
+                                patchPanelPort: n.patchPanelPort,
+                                vlan: n.vlan.name,
+                                device: n.device.name
                             });
                         });
-                        // vlan:n.vlan.name,
-                        // device:n.device.name
 
                         finalResult = { columns: {
                                 location: "مکان",
-                                switchId: "سوییچ",
+                                switch: "سوییچ",
                                 switchPort: "شماره پورت سوییچ",
-                                cabelNumber: "شماره کابل",
+                                cableNumber: "شماره کابل",
                                 patchPanelPort: "شماره patch panel",
                                 vlan: "شبکه مجازی",
                                 device: "نوع"
@@ -1721,19 +1746,19 @@ var allNetNodes = function () {
                         };
                         return _context2.abrupt("return", res.validSend(200, { netNodes: finalResult }));
 
-                    case 11:
-                        _context2.prev = 11;
+                    case 10:
+                        _context2.prev = 10;
                         _context2.t0 = _context2["catch"](0);
 
                         console.error(_context2.t0);
                         return _context2.abrupt("return", res.validSend(500, { error: _context2.t0 }));
 
-                    case 15:
+                    case 14:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, _this, [[0, 11]]);
+        }, _callee2, _this, [[0, 10]]);
     }));
 
     return function allNetNodes(_x3, _x4) {

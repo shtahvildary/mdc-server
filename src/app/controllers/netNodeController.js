@@ -24,7 +24,7 @@ export let allNetNodes=async(req,res)=>{
         .populate({path:"vlan",select:"name"})
         .populate({path:"device",select:"name"})
         .populate({path:"location",select:"name"});
-        console.plain(netNodes)
+        // console.plain(netNodes)
         var data=[]
         netNodes.map(n=>{
             console.plain("n: ",n)
@@ -32,21 +32,19 @@ export let allNetNodes=async(req,res)=>{
                 location:n.location.name,
                 switch:n.switchId.name,
                 switchPort:n.switchPort,
-                cabelNumber:n.cabelNumber,
+                cableNumber:n.cableNumber,
                 patchPanelPort:n.patchPanelPort,
+                vlan:n.vlan.name,
+                device:n.device.name
             })
             
-            
-            
         })
-        // vlan:n.vlan.name,
-        // device:n.device.name
 
         var finalResult={columns:{
             location: "مکان",
-            switchId: "سوییچ",
+            switch: "سوییچ",
             switchPort: "شماره پورت سوییچ",
-            cabelNumber: "شماره کابل",
+            cableNumber: "شماره کابل",
             patchPanelPort: "شماره patch panel",
             vlan:"شبکه مجازی",
             device:"نوع"
