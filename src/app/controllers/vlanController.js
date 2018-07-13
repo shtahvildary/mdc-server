@@ -26,3 +26,16 @@ export let allVlans=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+
+
+/*          POST /api/vlans/all/name            */
+export let allVlansNames=async(req,res)=>{
+    try{
+        var vlans= await vlan.find({}).select({name:1}).lean();
+        return res.validSend(200,{vlans});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}

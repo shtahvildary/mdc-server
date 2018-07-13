@@ -52,3 +52,14 @@ export let allSwitches=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+/*          POST /api/switches/all/name            */
+export let allSwitchesNames=async(req,res)=>{
+    try{
+        var switches= await Switch.find({}).select({name:1}).lean();
+        return res.validSend(200,{switches});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}

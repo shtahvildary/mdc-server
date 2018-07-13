@@ -19,7 +19,7 @@ export let newDevice=async(req,res)=>{
 /*          POST /api/devices/all            */
 export let allDevices=async(req,res)=>{
     try{
-        var devList= await Device.find({});
+        var devList= await Device.find({},{name:1});
         return res.validSend(200,{devices:devList});
     }catch(e){
         console.error(e);

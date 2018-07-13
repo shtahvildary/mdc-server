@@ -27,3 +27,14 @@ export let allLocations=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+/*          POST /api/locations/all/name            */
+export let allLocationsNames=async(req,res)=>{
+    try{
+        var locations= await Location.find({}).select({name:1}).lean();
+        return res.validSend(200,{locations});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
