@@ -3,7 +3,7 @@ var deviceSchema = mongoose.Schema({
   name:{type:'string'},
   ip:{type:'string'},
   description:{type:'string'},
-  deviceType:{type:'string'}, //0:storage  , 1:wifi  , 2:inrow , 3:accsess door  , 4:camera  , 5:server
+  deviceType:{type:mongoose.SchemaTypes.ObjectId,ref:'type'},
   model:{type:'string'}, 
   vlan:{ type:mongoose.SchemaTypes.ObjectId, ref:"Vlan"},
 

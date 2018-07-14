@@ -10,6 +10,7 @@ import devices from './devices';
 import locations from './locations';
 import netNodes from './netNodes';
 import vlans from './vlans';
+import deviceTypes from './deviceTypes';
 
 //USING ROUTES
 routes.use('/users', users);
@@ -18,5 +19,6 @@ routes.use('/devices',devices);
 routes.use('/locations',locations);
 routes.use('/netnodes',netNodes);
 routes.use('/vlans',vlans);
+routes.use('/devicetypes',deviceTypes);
 
 export default routes;
