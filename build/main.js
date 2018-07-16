@@ -77,8 +77,8 @@ module.exports = __webpack_require__(27);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_User__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Token__ = __webpack_require__(4);
 
@@ -97,9 +97,9 @@ var TOKENKEY = "x-access-token";
 
 //API AUTHENTICATION
 /* harmony default export */ __webpack_exports__["a"] = ((function () {
-	var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
+	var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
 		var api_token, verified;
-		return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+		return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
@@ -156,8 +156,8 @@ var TOKENKEY = "x-access-token";
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sensitive_Hash__ = __webpack_require__(28);
 
 
@@ -187,8 +187,8 @@ var userSchema = mongoose.Schema({
 userSchema.plugin(mongooseTimestamp);
 //UPDATING HASH WHEN PASSWORD IS CHANGED
 userSchema.virtual('password').set(function () {
-	var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(password) {
-		return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+	var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(password) {
+		return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
@@ -214,9 +214,9 @@ userSchema.virtual('password').set(function () {
 //AUTHORIZE USER
 userSchema.statics.authorize = function (user) {
 	return new Promise(function () {
-		var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(resolve, reject) {
+		var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(resolve, reject) {
 			var savedHash, match;
-			return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+			return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
 				while (1) {
 					switch (_context2.prev = _context2.next) {
 						case 0:
@@ -284,8 +284,8 @@ module.exports = require("lodash");
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return verify; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_User__ = __webpack_require__(2);
 
 
@@ -341,9 +341,9 @@ var validationConfig = function validationConfig() {
  *  @param {string} docid Optional- Unique Identifier of basedCollection's document that is related to user. If it's null, this function will find it in database automatically. 
  */
 /* harmony default export */ __webpack_exports__["a"] = ((function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(userid, docid) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(userid, docid) {
         var validation, basedCollection, useridKey, schema, doc;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -430,9 +430,9 @@ var validationConfig = function validationConfig() {
 })());
 //VERIFYING TOKEN
 var verify = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(token) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(token) {
         var authenticationInfo, basedCollection, userid, docid, user, result, schema, doc;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -508,8 +508,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_database__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__config_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routes__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_middlewares_CORS__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_middlewares_ExpressPlugins__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_middlewares_CORS__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_middlewares_ExpressPlugins__ = __webpack_require__(49);
 /**
  *          .::MAIN FILE::.
  * 
@@ -748,7 +748,7 @@ dotenv.config({
   path: path.resolve(__dirname, dotenvPath)
 });
 process.env.projectMode = projectMode;
-/* WEBPACK VAR INJECTION */}.call(exports, "src\\config"))
+/* WEBPACK VAR INJECTION */}.call(exports, "src/config"))
 
 /***/ }),
 /* 23 */
@@ -826,7 +826,7 @@ db.once('open', function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__locations__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__netNodes__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__vlans__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__deviceTypes__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__deviceTypes__ = __webpack_require__(45);
 /**
  *          .::ROUTES::.
  * All routes are imported here.
@@ -887,15 +887,15 @@ module.exports = require("regenerator-runtime");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 
 
 //HASHING PASSWORD
 var doHash = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(next) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(next) {
         var password;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -961,8 +961,8 @@ hashSchema.pre('findOneAndUpdate', doHash);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return register; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return me; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_User__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__middlewares_Token__ = __webpack_require__(4);
 
@@ -981,10 +981,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*          POST /api/users/register            */
 var register = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res, next) {
         var _req$body, fName, lName, username, password, newUser, savedUser, token;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1063,10 +1063,10 @@ var register = function () {
 }();
 /*          POST /api/users/login            */
 var login = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res, next) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res, next) {
         var _req$body2, username, password, user, authenticated, token;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1140,8 +1140,8 @@ var login = function () {
 }();
 /*          POST /api/users/me            */
 var me = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
@@ -1193,8 +1193,8 @@ routes.post('/all/names', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /*
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return newSwitch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allSwitches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return allSwitchesNames; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Switch__ = __webpack_require__(32);
 
 
@@ -1206,10 +1206,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*          POST /api/switches/new            */
 var newSwitch = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
         var _req$body, name, ip, description, model, diagramUrl, location, sw, savedSW;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1253,9 +1253,9 @@ var newSwitch = function () {
 
 /*          POST /api/switches/all            */
 var allSwitches = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
         var swList, data, finalResult;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1314,9 +1314,9 @@ var allSwitches = function () {
 
 /*          POST /api/switches/all/name            */
 var allSwitchesNames = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
         var switches;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
@@ -1397,8 +1397,8 @@ routes.post('/all', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* defau
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return newDevice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allDevices; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Device__ = __webpack_require__(35);
 
 
@@ -1410,10 +1410,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*          POST /api/devices/new            */
 var newDevice = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
         var _req$body, name, ip, description, deviceType, model, vlan, location, managementUrl, password, channel, dev, savedDevice;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1457,9 +1457,9 @@ var newDevice = function () {
 
 /*          POST /api/devices/all            */
 var allDevices = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
         var devList;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1549,8 +1549,8 @@ routes.post('/all/names', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /*
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return newLocation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allLocations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return allLocationsNames; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Location__ = __webpack_require__(38);
 
 
@@ -1562,10 +1562,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*      POST /api/locations/new     */
 var newLocation = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
         var _req$body, name, description, loc, savedLocation;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1609,9 +1609,9 @@ var newLocation = function () {
 
 /*      POST    /api/locations/all      */
 var allLocations = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
         var locList;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1645,9 +1645,9 @@ var allLocations = function () {
 
 /*          POST /api/locations/all/name            */
 var allLocationsNames = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
         var locations;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
@@ -1721,8 +1721,8 @@ routes.post('/all', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* defau
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return newNetNode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allNetNodes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_NetNode__ = __webpack_require__(41);
 
 
@@ -1736,10 +1736,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*          POST /api/netnodes/new            */
 var newNetNode = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
         var _req$body, patchPanelPort, cableNumber, switchId, switchPort, vlan, device, location, description, nNode, netNode;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1783,9 +1783,9 @@ var newNetNode = function () {
 
 /*          POST /api/netnodes/all            */
 var allNetNodes = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
         var netNodes, data, finalResult;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1899,8 +1899,8 @@ routes.post('/all/names', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /*
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return newVlan; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allVlans; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return allVlansNames; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Vlan__ = __webpack_require__(44);
 
 
@@ -1912,10 +1912,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /*          POST /api/vlans/new            */
 var newVlan = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
         var _req$body, number, name, ip, description, firstIp, lastIp, subnetMask, virtualLan, VLAN;
 
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
@@ -1959,9 +1959,9 @@ var newVlan = function () {
 
 /*          POST /api/vlans/all            */
 var allVlans = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
         var vlans;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
@@ -1995,9 +1995,9 @@ var allVlans = function () {
 
 /*          POST /api/vlans/all/name            */
 var allVlansNames = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee3(req, res) {
         var vlans;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
@@ -2053,6 +2053,144 @@ vlanSchema.plugin(mongooseTimestamp);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__ = __webpack_require__(46);
+/**
+ *          .::DEVICE ROUTES::.
+ * All Device's apis are routed here.
+ * 
+ */
+var routes = express.Router();
+
+
+
+
+//ENDPOINTS
+routes.post('/new', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__["b" /* newDeviceType */]);
+routes.post('/all', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__["a" /* allDeviceTypes */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (routes);
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return newDeviceType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allDeviceTypes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__ = __webpack_require__(47);
+
+
+var _this = this;
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+/*          POST /api/devicetypes/new            */
+var newDeviceType = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
+        var _req$body, type, description, savedDeviceType;
+
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        if (req.validate(["type"])) {
+                            _context.next = 2;
+                            break;
+                        }
+
+                        return _context.abrupt("return");
+
+                    case 2:
+                        _req$body = req.body, type = _req$body.type, description = _req$body.description;
+                        _context.prev = 3;
+                        type = new __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__["a" /* default */]({ type: type, description: description });
+                        _context.next = 7;
+                        return type.save();
+
+                    case 7:
+                        savedDeviceType = _context.sent;
+                        return _context.abrupt("return", res.validSend(200, { type: savedDeviceType }));
+
+                    case 11:
+                        _context.prev = 11;
+                        _context.t0 = _context["catch"](3);
+
+                        console.error(_context.t0);
+                        return _context.abrupt("return", res.validSend(500, { error: _context.t0 }));
+
+                    case 15:
+                    case "end":
+                        return _context.stop();
+                }
+            }
+        }, _callee, _this, [[3, 11]]);
+    }));
+
+    return function newDeviceType(_x, _x2) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+/*          POST /api/devicetypes/all            */
+var allDeviceTypes = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
+        var typeList;
+        return __WEBPACK_IMPORTED_MODULE_0__Volumes_MyDrive_MyProjects_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.prev = 0;
+                        _context2.next = 3;
+                        return __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__["a" /* default */].find({});
+
+                    case 3:
+                        typeList = _context2.sent;
+                        return _context2.abrupt("return", res.validSend(200, { types: typeList }));
+
+                    case 7:
+                        _context2.prev = 7;
+                        _context2.t0 = _context2["catch"](0);
+
+                        console.error(_context2.t0);
+                        return _context2.abrupt("return", res.validSend(500, { error: _context2.t0 }));
+
+                    case 11:
+                    case "end":
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, _this, [[0, 7]]);
+    }));
+
+    return function allDeviceTypes(_x3, _x4) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+var deviceTypeSchema = mongoose.Schema({
+  type: { type: 'string' }, //0:storage  , 1:wifi  , 2:inrow , 3:accsess door  , 4:camera  , 5:server
+  description: { type: 'string' }
+});
+deviceTypeSchema.plugin(mongooseTimestamp);
+
+/* harmony default export */ __webpack_exports__["a"] = (mongoose.model('DeviceType', deviceTypeSchema));
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = CORS;
 /**
  *          .::CORS::.
@@ -2068,11 +2206,11 @@ function CORS(req, res, next) {
 }
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isValid__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__isValid__ = __webpack_require__(50);
 /**
  *          .::EXPRESS PLUGINS::.
  * Express plugins and all adding data to req and res are here.
@@ -2092,7 +2230,7 @@ var validators = function validators(req, res) {
 };
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2202,144 +2340,6 @@ function res(status, body, omitKeys) {
   req: req,
   res: res
 });
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__ = __webpack_require__(49);
-/**
- *          .::DEVICE ROUTES::.
- * All Device's apis are routed here.
- * 
- */
-var routes = express.Router();
-
-
-
-
-//ENDPOINTS
-routes.post('/new', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__["b" /* newDeviceType */]);
-routes.post('/all', __WEBPACK_IMPORTED_MODULE_0__middlewares_Auth__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__controllers_DeviceTypeController__["a" /* allDeviceTypes */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (routes);
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return newDeviceType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return allDeviceTypes; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__ = __webpack_require__(50);
-
-
-var _this = this;
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-
-
-/*          POST /api/devicetypes/new            */
-var newDeviceType = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(req, res) {
-        var _req$body, type, description, savedDeviceType;
-
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-            while (1) {
-                switch (_context.prev = _context.next) {
-                    case 0:
-                        if (req.validate(["type"])) {
-                            _context.next = 2;
-                            break;
-                        }
-
-                        return _context.abrupt("return");
-
-                    case 2:
-                        _req$body = req.body, type = _req$body.type, description = _req$body.description;
-                        _context.prev = 3;
-                        type = new __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__["a" /* default */]({ type: type, description: description });
-                        _context.next = 7;
-                        return dev.save();
-
-                    case 7:
-                        savedDeviceType = _context.sent;
-                        return _context.abrupt("return", res.validSend(200, { type: savedDeviceType }));
-
-                    case 11:
-                        _context.prev = 11;
-                        _context.t0 = _context["catch"](3);
-
-                        console.error(_context.t0);
-                        return _context.abrupt("return", res.validSend(500, { error: _context.t0 }));
-
-                    case 15:
-                    case "end":
-                        return _context.stop();
-                }
-            }
-        }, _callee, _this, [[3, 11]]);
-    }));
-
-    return function newDeviceType(_x, _x2) {
-        return _ref.apply(this, arguments);
-    };
-}();
-
-/*          POST /api/devicetypes/all            */
-var allDeviceTypes = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.mark(function _callee2(req, res) {
-        var typeList;
-        return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_mdc_mdc_server_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-            while (1) {
-                switch (_context2.prev = _context2.next) {
-                    case 0:
-                        _context2.prev = 0;
-                        _context2.next = 3;
-                        return __WEBPACK_IMPORTED_MODULE_1__models_DeviceType__["a" /* default */].find({});
-
-                    case 3:
-                        typeList = _context2.sent;
-                        return _context2.abrupt("return", res.validSend(200, { types: typeList }));
-
-                    case 7:
-                        _context2.prev = 7;
-                        _context2.t0 = _context2["catch"](0);
-
-                        console.error(_context2.t0);
-                        return _context2.abrupt("return", res.validSend(500, { error: _context2.t0 }));
-
-                    case 11:
-                    case "end":
-                        return _context2.stop();
-                }
-            }
-        }, _callee2, _this, [[0, 7]]);
-    }));
-
-    return function allDeviceTypes(_x3, _x4) {
-        return _ref2.apply(this, arguments);
-    };
-}();
-
-/***/ }),
-/* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-var deviceTypeSchema = mongoose.Schema({
-  type: { type: 'string' }, //0:storage  , 1:wifi  , 2:inrow , 3:accsess door  , 4:camera  , 5:server
-  description: { type: 'string' }
-});
-deviceTypeSchema.plugin(mongooseTimestamp);
-
-/* harmony default export */ __webpack_exports__["a"] = (mongoose.model('DeviceType', deviceTypeSchema));
 
 /***/ })
 /******/ ]);

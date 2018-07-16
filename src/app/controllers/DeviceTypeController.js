@@ -6,7 +6,7 @@ export let newDeviceType=async(req,res)=>{
     var {type,description}=req.body;
     try{
         var type=new DeviceType({type,description});
-        var savedDeviceType=await dev.save();
+        var savedDeviceType=await type.save();
         return res.validSend(200,{type:savedDeviceType});
 
     }catch(e){
