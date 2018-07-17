@@ -6,12 +6,13 @@
 const routes = express.Router();
 
 import Auth from '../middlewares/Auth';
-import { newDeviceType ,allDeviceTypes} from '../controllers/DeviceTypeController'
+import { newDeviceType ,allDeviceTypes,allDeviceTypesNames} from '../controllers/DeviceTypeController'
 
 
 //ENDPOINTS
 routes.post('/new',Auth, newDeviceType);
 routes.post('/all',Auth, allDeviceTypes);
+routes.post('/all/names',Auth, allDeviceTypesNames);
 
 
 

@@ -26,3 +26,14 @@ export let allDevices=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+/*          POST /api/devices/all/name            */
+export let allDevicesNames=async(req,res)=>{
+    try{
+        var devices= await Device.find({}).select({name:1}).lean();
+        return res.validSend(200,{devices});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
