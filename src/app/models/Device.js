@@ -14,6 +14,8 @@ var deviceSchema = mongoose.Schema({
   password:{type:'string'},
   channel:{type:'string'},
 
+  //todo: add pc config 
+
 });
 deviceSchema.plugin(mongooseTimestamp);
 
