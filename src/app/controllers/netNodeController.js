@@ -19,7 +19,7 @@ export let new_NetNode=async(req,res)=>{
 /*          POST /api/netnodes/all            */
 export let all_NetNodes=async(req,res)=>{
     try{
-        var netNodes= await NetNode.find({},{_id:0}).
+        var netNodes= await NetNode.find({}).
         populate({path:"switchId",select:"name"})
         .populate({path:"vlan",select:"name"})
         .populate({path:"device",select:"name"})
@@ -28,7 +28,8 @@ export let all_NetNodes=async(req,res)=>{
         var data=[]
         netNodes.map(n=>{
             console.plain("n: ",n)
-            data.push({   
+            data.push({ 
+                _id:n._id,  
                 patchPanelPort:n.patchPanelPort,
                 cableNumber:n.cableNumber,
                 switch:n.switchId.name,
