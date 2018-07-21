@@ -73,16 +73,8 @@ export let update_Switch=async(req,res)=>{
     var {name,ip,description,model,diagramUrl,location,_id}=req.body;
     var query={name,ip,description,model,diagramUrl,location}
     try{
-        var sw=await Switch.findById(_id)
-        sw.name=name||sw.name;
-        sw.ip=ip||sw.ip;
-        sw.description=description||sw.description;
-        sw.model=model||sw.model;
-        sw.diagramUrl=diagramUrl||sw.diagramUrl;
-        sw.location=location||sw.location;
-
-          await sw.save()
-        return res.validSend(200,{switch:sw});
+        await Switch.update({_id},query)
+        return res.validSend(200,{message:"Update is successful"});
 
     }catch(e){
         console.error(e);
