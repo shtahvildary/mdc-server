@@ -3,7 +3,7 @@ import NetNode from '../models/NetNode'
 /*          POST /api/netnodes/new            */
 export let new_NetNode=async(req,res)=>{
     if(!req.validate(["patchPanelPort"]))return;
-    var {patchPanelPort,cableNumber,switchId,switchPort,vlan,device,location,description,location}=req.body;
+    var {patchPanelPort,cableNumber,switchId,switchPort,vlan,device,description,location}=req.body;
     try{
         var nNode=new NetNode({patchPanelPort,cableNumber,switchId,switchPort,vlan,device,location,description,location});
         var netNode=await nNode.save();
