@@ -6,6 +6,8 @@ var switchSchema = mongoose.Schema({
   model:{type:'string'}, 
   diagramUrl:{type:'string'},
   location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
+  status:{type:Number,default:0}, //0:active  , -1:deleted  
+
 
 
 });

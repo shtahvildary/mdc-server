@@ -1,0 +1,14 @@
+[
+    
+    {
+        "code": 105,
+        "title": "Add new users-group",
+        "description": "افزودن گروه کاربری جدید"
+    },
+    {
+        "code": 106,
+        "title": "update a users-group",
+        "description": "تغییر مشخصات گروه کاربری "
+    }
+    
+]

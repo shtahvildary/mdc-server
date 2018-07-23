@@ -9,6 +9,9 @@ var deviceSchema = mongoose.Schema({
 
   location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
   managementUrl:{type:'string'},
+
+  status:{type:Number,default:0}, //0:active  , -1:deleted  
+
  
   //wifi:
   password:{type:'string'},
