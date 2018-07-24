@@ -65,6 +65,83 @@ export let all_SwitchesNames=async(req,res)=>{
     }
 }
 
+/*          POST /api/netnodes/search            */
+export let search_Switches = async (req, res) => {
+    console.plain(req.body)
+    try {
+
+        var { search } = req.body;
+        if (!search) search = "";
+        var dbQuery = {
+            $or: [
+                {
+                    "name":
+                    {
+                        $regex: search,
+                        $options: 'i'
+                    }
+                }, {
+                    "ip": {
+                        $regex: search,
+                        $options: 'i'
+                    },
+                }, {
+                    
+                    "description": {
+                        $regex: search,
+                        $options: 'i'
+                    },
+                }, {
+                    // "model": {
+                    //     $regex: search,
+                    //     $options: 'i'
+                    // },
+                    "diagramUrl": {$regex: search,
+                        $options: 'i'},
+                //         location: {$regex: search,
+                //             $options: 'i'},
+                // }
+                    }
+
+            ]
+        }
+        var swList = await Switch.find(dbQuery, { _id: 0 }).
+        populate({path:"location",select:"name"});
+
+        console.plain(swList)
+        var data=[];
+        swList.map(n=>{
+            data.push({
+                _id:n._id,
+                name:n.name,
+  ip:n.ip,
+  description:n.description,
+  model:n.model, 
+  diagramUrl:n.diagramUrl,
+  location:n.location.name,
+  
+            })
+        })
+
+        var finalResult={columns:{
+            name:"نام",
+            ip:"آدرس",
+            description:"توضیحات",
+            model:"مدل", 
+            diagramUrl:"نمودار",
+            location:"مکان",
+          
+        },
+        switchesData:data
+    }
+        
+        return res.validSend(200,{switches:finalResult});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
+
 /*          POST /api/switches/update            */
 
 export let update_Switch=async(req,res)=>{
@@ -81,4 +158,6 @@ export let update_Switch=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+
 

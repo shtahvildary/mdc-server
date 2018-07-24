@@ -129,9 +129,9 @@ export let search_NetNodes = async (req, res) => {
                 location: n.location.name,
 
                 switchId:n.switchId._id,
-                vlanId:n.vlanId._id,
-                deviceId:n.deviceId._id,
-                locationId:n.locationId._id,
+                vlanId:n.vlan._id,
+                deviceId:n.device._id,
+                locationId:n.location._id,
             })
 
         })
