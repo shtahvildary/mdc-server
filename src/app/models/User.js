@@ -4,10 +4,11 @@
  * 
  */
 import Hash from './sensitive/Hash';
+import { isNumber } from 'util';
 
 
 var userSchema = mongoose.Schema({
-
+	status:{type:Number,default:0}, //0:active  , -1:deleted  
 	fName: {
 		type: String,
 		
@@ -18,6 +19,7 @@ var userSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	userType:{type:Number}	//0:zAdmin	, 1:Admin	,	2:User
 });
 
 userSchema.plugin(mongooseTimestamp);
