@@ -56,7 +56,7 @@ export let all_DeviceTypes=async(req,res)=>{
 /*          POST /api/devicetypes/all/name            */
 export let all_DeviceTypes_Names=async(req,res)=>{
     try{
-        var deviceTypes= await DeviceType.find({status:0}).select({name:1}).lean();
+        var deviceTypes= await DeviceType.find({status:0}).select({name:1,specialProperties:1}).lean();
         return res.validSend(200,{deviceTypes});
     }catch(e){
         console.error(e);

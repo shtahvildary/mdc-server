@@ -15,7 +15,7 @@ var deviceSchema = mongoose.Schema({
 
 
 
-  specialProperties:[Object], // array of required fields for each device type, like config of PCs, channel for wifi ,...    *markModified*
+  specialProperties:[{name:String,value:String}], // array of required fields for each device type, like config of PCs, channel for wifi ,...    *markModified*
  
   // //wifi:
   // password:{type:'string'},
