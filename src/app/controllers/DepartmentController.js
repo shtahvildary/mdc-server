@@ -65,7 +65,7 @@ export let all_Departments=async(req,res)=>{
 /*          POST /api/departments/all/name            */
 export let all_Departments_Names=async(req,res)=>{
     try{
-        var departments= await Location.find({status:0}).select({name:1}).lean();
+        var departments= await Department.find({status:0}).select({name:1}).lean();
         return res.validSend(200,{departments});
     }catch(e){
         console.error(e);

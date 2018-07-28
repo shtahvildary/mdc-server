@@ -3,9 +3,9 @@ import NetNode from '../models/NetNode'
 /*          POST /api/netnodes/new            */
 export let new_NetNode = async (req, res) => {
     if (!req.validate(["patchPanelPort"])) return;
-    var { patchPanelPort, cableNumber, switchId, switchPort, vlanId, deviceId, description, locationId,rackroomId } = req.body;
+    var { patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom } = req.body;
     try {
-        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlanId, deviceId, description, locationId,rackroomId });
+        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom });
         var netNode = await nNode.save();
         return res.validSend(200, { netNode });
 
@@ -21,10 +21,10 @@ export let all_NetNodes = async (req, res) => {
     try {
         var netNodes = await NetNode.find({status:0}).
             populate({ path: "switchId", select:[ "name","_id"] })
-            .populate({ path: "vlanId", select: ["name","_id" ]})
-            .populate({ path: "deviceId", select: [ "name","_id"]})
-            .populate({ path: "locationId", select: [ "name","_id"] })
-            .populate({ path: "rackroomId", select: [ "name","_id"] });
+            .populate({ path: "vlan", select: ["name","_id" ]})
+            .populate({ path: "device", select: [ "name","_id"]})
+            .populate({ path: "location", select: [ "name","_id"] })
+            .populate({ path: "rackroom", select: [ "name","_id"] });
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
@@ -35,17 +35,17 @@ export let all_NetNodes = async (req, res) => {
                 cableNumber: n.cableNumber,
                 switchName: n.switchId.name,
                 switchPort: n.switchPort,
-                vlanName: n.vlanId.name,
-                deviceName: n.deviceId.name,
+                vlanName: n.vlan.name,
+                deviceName: n.device.name,
                 descriptionName: n.description,
-                locationName: n.locationId.name,
-                rackroomName: n.rackroomId.name,
+                locationName: n.location.name,
+                rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
-                vlanId:n.vlanId._id,
-                deviceId:n.deviceId._id,
-                locationId:n.locationId._id,
-                rackroomId:n.rackroomId._id,
+                vlanId:n.vlan._id,
+                deviceId:n.device._id,
+                locationId:n.location._id,
+                rackroomId:n.rackroom._id,
             })
 
         })
@@ -113,14 +113,15 @@ export let search_NetNodes = async (req, res) => {
             ]
         }
         // todo: (dbQuery) and (status=0)
-        //    data = {$and:[{'departmentId': req.session.departmentId},{status:1}]};
+        var finalQuery={$and:[dbQuery,{status:0}]}
 
-        var netNodes = await NetNode.find(dbQuery, { _id: 0 }).
+        // var netNodes = await NetNode.find(dbQuery, { _id: 0 }).
+        var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
             populate({ path: "switchId", select:[ "name","_id"] })
-            .populate({ path: "vlanId", select: [ "name","_id"] })
-            .populate({ path: "deviceId", select: [ "name","_id"] })
-            .populate({ path: "locationId", select: [ "name","_id"] })
-            .populate({ path: "rackroomId", select: [ "name","_id"] });
+            .populate({ path: "vlan", select: [ "name","_id"] })
+            .populate({ path: "device", select: [ "name","_id"] })
+            .populate({ path: "location", select: [ "name","_id"] })
+            .populate({ path: "rackroom", select: [ "name","_id"] });
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
@@ -131,17 +132,17 @@ export let search_NetNodes = async (req, res) => {
                 cableNumber: n.cableNumber,
                 switchName: n.switchId.name,
                 switchPort: n.switchPort,
-                vlanName: n.vlanId.name,
-                deviceName: n.deviceId.name,
+                vlanName: n.vlan.name,
+                deviceName: n.device.name,
                 descriptionName: n.description,
-                locationName: n.locationId.name,
-                rackroomName: n.rackroomId.name,
+                locationName: n.location.name,
+                rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
-                vlanId:n.vlanId._id,
-                deviceId:n.deviceId._id,
+                vlanId:n.vlan._id,
+                deviceId:n.device._id,
                 locationId:n.location._id,
-                rackroomId:n.rackroomId._id,
+                rackroomId:n.rackroom._id,
             })
 
         })
@@ -175,9 +176,9 @@ export let search_NetNodes = async (req, res) => {
 export let update_netNode=async(req,res)=>{
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
         if(!req.validate(["_id"]))return;
-    var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlanId, deviceId, description, locationId ,rackroomId} = req.body;
+    var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location ,rackroom} = req.body;
         
-        var query={patchPanelPort, cableNumber, switchId, switchPort, vlanId, deviceId, description, locationId,rackroomId}
+        var query={patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom}
         try{
             await NetNode.update({_id},query)
             return res.validSend(200,{message:"Update is successful"});

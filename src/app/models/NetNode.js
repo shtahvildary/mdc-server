@@ -6,11 +6,11 @@ var netNodeSchema=mongoose.Schema({
     // switchName:{}
     switchId:{type:mongoose.SchemaTypes.ObjectId,ref:'Switch'},
     switchPort:{type:'string'},
-    vlanId:{type:mongoose.SchemaTypes.ObjectId,ref:'Vlan'},
-    deviceId:{type:mongoose.SchemaTypes.ObjectId,ref:'Device'}, //wifi,pc,inrow, accsess door, camera,server,pc ... 
+    vlan:{type:mongoose.SchemaTypes.ObjectId,ref:'Vlan'},
+    device:{type:mongoose.SchemaTypes.ObjectId,ref:'Device'}, //wifi,pc,inrow, accsess door, camera,server,pc ... 
     description:{type:'string'},
-    locationId:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
-    rackroomId:{type:mongoose.SchemaTypes.ObjectId,ref:'Rackroom'},
+    location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
+    rackroom:{type:mongoose.SchemaTypes.ObjectId,ref:'Rackroom'},
 
 
 })

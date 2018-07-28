@@ -3,7 +3,7 @@ import Switch from "../models/Switch";
 /*          POST /api/switches/new            */
 export let new_Switch = async (req, res) => {
   if (!req.validate(["name", "model"])) return;
-  var { name, ip, description, model, diagramUrl, rackroomId } = req.body;
+  var { name, ip, description, model, diagramUrl, rackroom } = req.body;
   try {
     var sw = new Switch({
       name,
@@ -11,7 +11,7 @@ export let new_Switch = async (req, res) => {
       description,
       model,
       diagramUrl,
-      rackroomId
+      rackroom
     });
     var savedSW = await sw.save();
     return res.validSend(200, { switch: savedSW });
@@ -25,7 +25,7 @@ export let new_Switch = async (req, res) => {
 export let all_Switches = async (req, res) => {
   try {
     var swList = await Switch.find({status:0}).populate({
-      path: "rackroomId",
+      path: "rackroom",
       select: "name"
     });
     var data = [];
@@ -37,7 +37,7 @@ export let all_Switches = async (req, res) => {
         description: n.description,
         model: n.model,
         diagramUrl: n.diagramUrl,
-        rackroomName: n.rackroomId.name
+        rackroomName: n.rackroom.name
       });
     });
 
@@ -114,8 +114,9 @@ export let search_Switches = async (req, res) => {
         }
       ]
     };
-    // todo: (dbQuery) and (status=0)
-    var swList = await Switch.find(dbQuery, { _id: 0 }).populate({
+    var finalQuery={$and:[dbQuery,{status:0}]}
+
+    var swList = await Switch.find(finalQuery, { _id: 0 }).populate({
       path: "rackroomId",
       select: "name"
     });
@@ -130,7 +131,7 @@ export let search_Switches = async (req, res) => {
         description: n.description,
         model: n.model,
         diagramUrl: n.diagramUrl,
-        rackroomName: n.rackroomId.name
+        rackroomName: n.rackroom.name
       });
     });
 
@@ -158,8 +159,8 @@ export let search_Switches = async (req, res) => {
 export let update_Switch = async (req, res) => {
   // router.post("/update", auth, upload.single('logo'),function(req, res) {
   if (!req.validate(["_id"])) return;
-  var { name, ip, description, model, diagramUrl, location, _id } = req.body;
-  var query = { name, ip, description, model, diagramUrl, location };
+  var { name, ip, description, model, diagramUrl, rackroom, _id } = req.body;
+  var query = { name, ip, description, model, diagramUrl, rackroom };
   try {
     await Switch.update({ _id }, query);
     return res.validSend(200, { message: "Update is successful" });
