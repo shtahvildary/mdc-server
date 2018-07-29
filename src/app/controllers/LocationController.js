@@ -2,10 +2,10 @@ import Location from '../models/Location'
 
 /*      POST /api/locations/new     */
 export let new_Location=async(req,res)=>{
-    if(!req.validate(["building"])) return;
-    var {description,building,floor,halfFloor,room}=req.body;
+    if(!req.validate(["name","building"])) return;
+    var {name,description,building,floor,halfFloor,room}=req.body;
     try{
-        var loc=new Location({description,building,floor,halfFloor,room});
+        var loc=new Location({name,description,building,floor,halfFloor,room});
         var savedLocation=await loc.save();
         return res.validSend(200,{location:savedLocation})
 
@@ -24,6 +24,7 @@ export let all_Locations=async(req,res)=>{
         locList.map(n=>{
             data.push({
                 _id:n._id,
+                name:n.name,
                 building:n.building,
                 floor:n.floor,
                 halfFloor:n.halfFloor,
@@ -33,6 +34,7 @@ export let all_Locations=async(req,res)=>{
         })
         var finalResult={
             columns:{
+              name:"نام",
                 building:"ساختمان",
                 floor:"طبقه",
                 halfFloor:"نیم طبقه",
@@ -50,15 +52,15 @@ export let all_Locations=async(req,res)=>{
 }
 
 // /*          POST /api/locations/all/name            */
-// export let all_Locations_Names=async(req,res)=>{
-//     try{
-//         var locations= await Location.find({status:0}).select({name:1}).lean();
-//         return res.validSend(200,{locations});
-//     }catch(e){
-//         console.error(e);
-//         return res.validSend(500,{error:e});
-//     }
-// }
+export let all_Locations_Names=async(req,res)=>{
+    try{
+        var locations= await Location.find({status:0}).select({name:1}).lean();
+        return res.validSend(200,{locations});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
 
 /*          POST /api/locations/search            */
 export let search_Locations = async (req, res) => {
@@ -70,6 +72,10 @@ export let search_Locations = async (req, res) => {
       var dbQuery = {
         $or: [
           {
+            name:{
+              $regex:search,
+              $options:"i",
+            },
             building: {
               $regex: search,
               $options: "i"
@@ -102,13 +108,14 @@ export let search_Locations = async (req, res) => {
       };
       var finalQuery={$and:[dbQuery,{status:0}]}
   
-      var locList = await Switch.find(finalQuery, { _id: 0 })
+      var locList = await Location.find(finalQuery, { _id: 0 })
   
       console.plain(locList);
       var data = [];
       locList.map(n => {
         data.push({
             _id:n._id,
+            name:n.name,
             building:n.building,
             floor:n.floor,
             halfFloor:n.halfFloor,
@@ -118,6 +125,7 @@ export let search_Locations = async (req, res) => {
     })
     var finalResult={
         columns:{
+          name:"نام",
             building:"ساختمان",
             floor:"طبقه",
             halfFloor:"نیم طبقه",
@@ -127,7 +135,7 @@ export let search_Locations = async (req, res) => {
         locationsData:data
     }
   
-      return res.validSend(200, { switches: finalResult });
+      return res.validSend(200, { locations: finalResult });
     } catch (e) {
       console.error(e);
       return res.validSend(500, { error: e });
@@ -139,9 +147,9 @@ export let search_Locations = async (req, res) => {
 export let update_Location = async (req, res) => {
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
     if (!req.validate(["_id"])) return;
-    var {description,building,floor,halfFloor,room,_id}=req.body;
+    var {name,description,building,floor,halfFloor,room,_id}=req.body;
    
-    var query = { description, building, floor, halfFloor, room };
+    var query = { name,description, building, floor, halfFloor, room };
     try {
       await Location.update({ _id }, query);
       return res.validSend(200, { message: "Update is successful" });
