@@ -6,11 +6,12 @@
 const routes=express.Router();
 
 import Auth from '../middlewares/Auth';
-import {newVlan,allVlans,allVlansNames} from '../controllers/vlanController';
+import {new_Vlan,all_Vlans,select_Vlan_byId,all_Vlans_Names} from '../controllers/vlanController';
 
 //ENDPOINTS
-routes.post('/new',Auth,newVlan);
-routes.post('/all',Auth,allVlans);
-routes.post('/all/names',Auth,allVlansNames);
+routes.post('/new',Auth,new_Vlan);
+routes.post('/all',Auth,all_Vlans);
+routes.post('/all/names',Auth,all_Vlans_Names);
+routes.post('/select/one',Auth,select_Vlan_byId);
 
 export default routes;

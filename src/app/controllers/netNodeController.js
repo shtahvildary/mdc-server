@@ -3,9 +3,9 @@ import NetNode from '../models/NetNode'
 /*          POST /api/netnodes/new            */
 export let new_NetNode = async (req, res) => {
     if (!req.validate(["patchPanelPort"])) return;
-    var { patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom } = req.body;
+    var { patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
     try {
-        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom });
+        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location });
         var netNode = await nNode.save();
         return res.validSend(200, { netNode });
 
@@ -24,7 +24,7 @@ export let all_NetNodes = async (req, res) => {
             .populate({ path: "vlan", select: ["name","_id" ]})
             .populate({ path: "device", select: [ "name","_id"]})
             .populate({ path: "location", select: [ "name","_id"] })
-            .populate({ path: "rackroom", select: [ "name","_id"] });
+            // .populate({ path: "rackroom", select: [ "name","_id"] });
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
@@ -39,13 +39,13 @@ export let all_NetNodes = async (req, res) => {
                 deviceName: n.device.name,
                 descriptionName: n.description,
                 locationName: n.location.name,
-                rackroomName: n.rackroom.name,
+                // rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
                 vlanId:n.vlan._id,
                 deviceId:n.device._id,
                 locationId:n.location._id,
-                rackroomId:n.rackroom._id,
+                // rackroomId:n.rackroom._id,
             })
 
         })
@@ -60,7 +60,7 @@ export let all_NetNodes = async (req, res) => {
                 deviceName: "نوع",
                 description: "توضیحات",
                 locationName: "مکان",
-                rackroomName:"رک روم",
+                // rackroomName:"رک روم",
             },
             netNodesData: data
         }
@@ -70,7 +70,22 @@ export let all_NetNodes = async (req, res) => {
         return res.validSend(500, { error: e });
     }
 }
+/*          POST /api/netNodes/select/one            */
+export let select_NetNode_byId = async (req, res) => {
 
+    try {
+      var netNodeInfo = await NetNode.findById(req.body._id) 
+      .populate({ path: "switchId", select:[ "name","_id"] })
+      .populate({ path: "vlan", select: ["name","_id" ]})
+      .populate({ path: "device", select: [ "name","_id"]})
+      .populate({ path: "location", select: [ "name","_id"] })
+        .lean();
+      return res.validSend(200, { netNodeInfo });
+    } catch (e) {
+      console.error(e);
+      return res.validSend(500, { error: e });
+    }
+  };
 
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
@@ -121,7 +136,7 @@ export let search_NetNodes = async (req, res) => {
             .populate({ path: "vlan", select: [ "name","_id"] })
             .populate({ path: "device", select: [ "name","_id"] })
             .populate({ path: "location", select: [ "name","_id"] })
-            .populate({ path: "rackroom", select: [ "name","_id"] });
+            // .populate({ path: "rackroom", select: [ "name","_id"] });
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
@@ -136,13 +151,13 @@ export let search_NetNodes = async (req, res) => {
                 deviceName: n.device.name,
                 descriptionName: n.description,
                 locationName: n.location.name,
-                rackroomName: n.rackroom.name,
+                // rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
                 vlanId:n.vlan._id,
                 deviceId:n.device._id,
                 locationId:n.location._id,
-                rackroomId:n.rackroom._id,
+                // rackroomId:n.rackroom._id,
             })
 
         })
@@ -157,7 +172,7 @@ export let search_NetNodes = async (req, res) => {
                 deviceName: "نوع",
                 description: "توضیحات",
                 locationName: "مکان",
-                rackroomName:"رک روم",
+                // rackroomName:"رک روم",
             },
             netNodesData: data
         }
@@ -176,9 +191,9 @@ export let search_NetNodes = async (req, res) => {
 export let update_netNode=async(req,res)=>{
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
         if(!req.validate(["_id"]))return;
-    var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location ,rackroom} = req.body;
+    var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
         
-        var query={patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location,rackroom}
+        var query={patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location}
         try{
             await NetNode.update({_id},query)
             return res.validSend(200,{message:"Update is successful"});

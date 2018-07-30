@@ -51,6 +51,17 @@ export let all_Locations=async(req,res)=>{
     }
 }
 
+/*      POST    /api/locations/select/one      */
+export let select_Location_byId = async (req, res) => {
+  try {
+    var locationInfo = await Location.findById(req.body._id) .lean();
+    return res.validSend(200, { locationInfo });
+  } catch (e) {
+    console.error(e);
+    return res.validSend(500, { error: e });
+  }
+};
+
 // /*          POST /api/locations/all/name            */
 export let all_Locations_Names=async(req,res)=>{
     try{

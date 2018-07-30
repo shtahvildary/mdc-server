@@ -68,6 +68,17 @@ export let all_Devices=async(req,res)=>{
     }
 }
 
+/*      POST    /api/devices/select/one      */
+export let select_Device_byId = async (req, res) => {
+    try {
+      var deviceInfo = await Device.findById(req.body._id).populate({path:"deviceType",select:"name"}) .lean();
+      return res.validSend(200, { deviceInfo });
+    } catch (e) {
+      console.error(e);
+      return res.validSend(500, { error: e });
+    }
+  };
+
 /*          POST /api/devices/all/name            */
 export let all_Devices_Names=async(req,res)=>{
     try{

@@ -10,7 +10,7 @@ var deviceSchema = mongoose.Schema({
   // vlan:{ type:mongoose.SchemaTypes.ObjectId, ref:"Vlan"},
 
   // location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
-  managementUrl:{type:'string'},
+  
   department:{type:mongoose.SchemaTypes.ObjectId,ref:'Department'},
 
 

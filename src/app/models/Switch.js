@@ -6,7 +6,8 @@ var switchSchema = mongoose.Schema({
   description:{type:'string'},
   model:{type:'string'}, 
   diagramUrl:{type:'string'},
-  rackroom:{type:mongoose.SchemaTypes.ObjectId,ref:'Rackroom'},
+  // rackroom:{type:mongoose.SchemaTypes.ObjectId,ref:'Rackroom'},
+  location:{type:mongoose.SchemaTypes.ObjectId,ref:'Location'},
 
 
 
