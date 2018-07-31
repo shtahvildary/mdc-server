@@ -55,8 +55,8 @@ export let all_Devices=async(req,res)=>{
                 deviceTypeName:"نوع",
                 model:"مدل",
                 code:"شماره اموال",
-                managementUrl:"پنل مدیریتی",
                 department:"واحد",
+                specialProperties:"سایر ویژگیها",
             },
             deviceData:data
         }

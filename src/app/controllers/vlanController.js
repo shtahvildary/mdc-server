@@ -153,7 +153,7 @@ export let search_Vlans = async (req, res) => {
         },
         vlansData:data,
     }
-      return res.validSend(200, { locations: finalResult });
+      return res.validSend(200, { vlans: finalResult });
     } catch (e) {
       console.error(e);
       return res.validSend(500, { error: e });
@@ -164,7 +164,7 @@ export let search_Vlans = async (req, res) => {
 
 export let update_Vlan = async (req, res) => {
     if (!req.validate(["_id"])) return;
-    var {number,name,ip,firstIp,lastIp,subnetMask,description}=req.body;
+    var {_id,number,name,ip,firstIp,lastIp,subnetMask,description}=req.body;
    
     var query = { number,name,ip, firstIp, lastIp, subnetMask ,description};
     try {
