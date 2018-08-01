@@ -1,4 +1,3 @@
-
 var switchSchema = mongoose.Schema({
   status:{type:Number,default:0}, //0:active  , -1:deleted  
   name:{type:'string'},
