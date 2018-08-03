@@ -1,4 +1,5 @@
 import NetNode from '../models/NetNode'
+import Location from '../models/Location'
 
 /*          POST /api/netnodes/new            */
 export let new_NetNode = async (req, res) => {
@@ -12,7 +13,7 @@ export let new_NetNode = async (req, res) => {
     } catch (e) {
         console.error(e);
         return res.validSend(500, { error: e });
-    }
+    } 
 
 }
 
@@ -121,15 +122,17 @@ export let search_NetNodes = async (req, res) => {
                         $regex: search,
                         $options: 'i'
                     },
-                    // location: {$regex: search,
-                    //     $options: 'i'},
-                }
+                },
+                
 
             ]
         }
         // todo: (dbQuery) and (status=0)
         var finalQuery={$and:[dbQuery,{status:0}]}
-
+        var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
+        console.log("locs",locations)
+        locations=locations.map(l=>l._id)
+        if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}})
         // var netNodes = await NetNode.find(dbQuery, { _id: 0 }).
         var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
             populate({ path: "switchId", select:[ "name","_id"] })

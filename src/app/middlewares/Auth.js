@@ -4,9 +4,7 @@
  * 
  */
 import User from '../models/User';
-import {
-	verify
-} from './Token';
+import {verify} from './Token';
 //The KEY that has token
 const TOKENKEY="x-access-token"
 

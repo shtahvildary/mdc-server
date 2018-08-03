@@ -19,7 +19,8 @@ var userSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	userType:{type:Number}	//0:zAdmin	, 1:Admin	,	2:User
+	userType:{type:Number},	//0:zAdmin	, 1:Admin	,	2:User
+permissions:[{type:Number}],
 });
 
 userSchema.plugin(mongooseTimestamp);

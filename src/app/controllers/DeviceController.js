@@ -39,6 +39,8 @@ export let all_Devices=async(req,res)=>{
                 departmentId:n.department._id,
             })
             var property=[];
+            // if(n.specialProperties)
+            console.log("n.specialProperties: ",n)
             n.specialProperties.map(p=>{
                 property.push({
                     name:p.name,
