@@ -30,24 +30,29 @@ export let all_NetNodes = async (req, res) => {
         var data = []
         netNodes.map(n => {
             console.plain("n: ", n)
+            var vlan,device,location="";
+            if(n.vlan)vlan=n.vlan
+            if(n.device)device=n.device
+            if(n.location)vlan=n.location
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
                 switchName: n.switchId.name,
                 switchPort: n.switchPort,
-                vlanName: n.vlan.name,
-                deviceName: n.device.name,
+                vlanName: vlan.name,
+                deviceName: device.name,
                 descriptionName: n.description,
-                locationName: n.location.name,
+                locationName: location.name,
                 // rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
-                vlanId:n.vlan._id,
-                deviceId:n.device._id,
-                locationId:n.location._id,
+                vlanId:vlan._id,
+                deviceId:device._id,
+                locationId:location._id,
                 // rackroomId:n.rackroom._id,
             })
+            
 
         })
 
