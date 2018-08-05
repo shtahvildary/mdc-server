@@ -127,7 +127,7 @@ export let search_NetNodes = async (req, res) => {
 
             ]
         }
-        // todo: (dbQuery) and (status=0)
+        
         var finalQuery={$and:[dbQuery,{status:0}]}
         var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
         console.log("locs",locations)
@@ -143,7 +143,7 @@ export let search_NetNodes = async (req, res) => {
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
-            console.plain("n: ", n)
+            
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,

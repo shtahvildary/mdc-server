@@ -89,3 +89,31 @@ export let me = async(req, res) => {
     //OK RESPONSE 
     res.validSend(200, req.user);
 }
+
+export let update_me=async(req,res)=>{
+    if (!req.validate(["username", "password"])) return;
+
+    var _id=req.user
+    var{fName,lName,password}=req.body
+    var query={fName,lName,password}
+    try{
+        await User.update({_id},query);
+        return res.validSend(200,{ message: "Update is successful" });
+    } catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
+
+export let update_others=async(req,res)=>{
+    if (!req.validate(["_id"])) return;
+    var{_id,fName,lName,password,userType,permissions}=req.body
+    var query={fName,lName,password,userType,permissions}
+    try{
+        await User.update({_id},query);
+        return res.validSend(200,{ message: "Update is successful" });
+    } catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}

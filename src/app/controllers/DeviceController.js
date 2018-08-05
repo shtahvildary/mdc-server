@@ -19,11 +19,24 @@ export let new_Device=async(req,res)=>{
 /*          POST /api/devices/all            */
 export let all_Devices=async(req,res)=>{
     try{
-        var devList= await Device.find({status:0},{name:1})
+        var devList= await Device.find({status:0}).lean()
         .populate({path:"deviceType",select:["name","_id"]})
         .populate({path:"department",select:["name","_id"]});
         var data=[];
         devList.map(n=>{
+            
+            // ////////////////////////////
+            // //for speCialProperties:
+            // var property=[];
+            // console.plain("n.specialProperties: ",n)
+            // n.specialProperties.map(p=>{
+            //     property.push({
+            //         name:p.name,
+            //         value:p.value,
+            //     })
+            // })
+            // ////////////////////////////
+
             data.push({
                 _id:n._id,
                 name:n.name,
@@ -37,17 +50,10 @@ export let all_Devices=async(req,res)=>{
 
                 deviceTypeId:n.deviceType._id,
                 departmentId:n.department._id,
+                // specialProperties:property,
             })
-            var property=[];
-            // if(n.specialProperties)
-            console.log("n.specialProperties: ",n)
-            n.specialProperties.map(p=>{
-                property.push({
-                    name:p.name,
-                    value:p.value,
-                })
-            })
-            data.push({specialProperties:property})
+           
+            // data.push({specialProperties:property})
         })
         var finalResult={
             columns:{
@@ -58,9 +64,9 @@ export let all_Devices=async(req,res)=>{
                 model:"مدل",
                 code:"شماره اموال",
                 department:"واحد",
-                specialProperties:"سایر ویژگیها",
+                // specialProperties:"سایر ویژگیها",
             },
-            deviceData:data
+            devicesData:data
         }
 
         return res.validSend(200,{devices:finalResult});
@@ -73,6 +79,7 @@ export let all_Devices=async(req,res)=>{
 /*      POST    /api/devices/select/one      */
 export let select_Device_byId = async (req, res) => {
     try {
+        console.plain(req.body._id)
       var deviceInfo = await Device.findById(req.body._id).populate({path:"deviceType",select:"name"}) .lean();
       return res.validSend(200, { deviceInfo });
     } catch (e) {
