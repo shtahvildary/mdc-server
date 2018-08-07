@@ -3,9 +3,9 @@ import Location from '../models/Location'
 /*      POST /api/locations/new     */
 export let new_Location=async(req,res)=>{
     if(!req.validate(["name","building"])) return;
-    var {name,description,building,floor,halfFloor,room}=req.body;
+    var {name,description,building,fHf,level,room}=req.body;
     try{
-        var loc=new Location({name,description,building,floor,halfFloor,room});
+        var loc=new Location({name,description,building,fHf,level,room});
         var savedLocation=await loc.save();
         return res.validSend(200,{location:savedLocation})
 
@@ -22,22 +22,24 @@ export let all_Locations=async(req,res)=>{
         var locList=await Location.find({status:0});
         var data=[];
         locList.map(n=>{
+          var fHfLevel=""
+          if(n.fHf===0) fHfLevel="طبقه "+n.level
+          else fHfLevel="نیم طبقه "+n.level
             data.push({
                 _id:n._id,
                 name:n.name,
                 building:n.building,
-                floor:n.floor,
-                halfFloor:n.halfFloor,
+                fHfLevel:fHfLevel,
                 room:n.room,
                 description:n.description,
             })
         })
+
         var finalResult={
             columns:{
               name:"نام",
                 building:"ساختمان",
-                floor:"طبقه",
-                halfFloor:"نیم طبقه",
+                fHfLevel:"طبقه / نیم طبقه",
                 room:"اتاق",
                 description:"توضیحات",
             },
@@ -55,6 +57,7 @@ export let all_Locations=async(req,res)=>{
 export let select_Location_byId = async (req, res) => {
   try {
     var locationInfo = await Location.findById(req.body._id) .lean();
+    console.plain("locationInfo: ",locationInfo)
     return res.validSend(200, { locationInfo });
   } catch (e) {
     console.error(e);
@@ -81,8 +84,7 @@ export let search_Locations = async (req, res) => {
       var { search } = req.body;
       if (!search) search = "";
       var dbQuery = {
-        $or: [
-          {
+        $or: [{
             name:{
               $regex:search,
               $options:"i",
@@ -91,59 +93,52 @@ export let search_Locations = async (req, res) => {
               $regex: search,
               $options: "i"
             }
-          },
-          {
-            floor: {
-              $regex: search,
-              $options: "i"
-            }
-          },
-          {
+          ,
             description: {
               $regex: search,
               $options: "i"
             }
-          },
-          {
-            halfFloor: {
+          ,
+            level: {
               $regex: search,
               $options: "i"
-            },
+          },
             room: {
               $regex: search,
               $options: "i"
             }
             
-          }
+          } 
         ]
       };
       var finalQuery={$and:[dbQuery,{status:0}]}
   
       var locList = await Location.find(finalQuery, { _id: 0 })
-  
       console.plain(locList);
       var data = [];
       locList.map(n => {
-        data.push({
-            _id:n._id,
-            name:n.name,
-            building:n.building,
-            floor:n.floor,
-            halfFloor:n.halfFloor,
-            room:n.room,
-            description:n.description,
-        })
-    })
-    var finalResult={
-        columns:{
-          name:"نام",
-            building:"ساختمان",
-            floor:"طبقه",
-            halfFloor:"نیم طبقه",
-            room:"اتاق",
-            description:"توضیحات",
-        },
-        locationsData:data
+
+        var fHfLevel=""
+        if(n.fHf===0) fHfLevel="طبقه "+n.level
+        else fHfLevel="نیم طبقه "+n.level
+          data.push({
+              _id:n._id,
+              name:n.name,
+              building:n.building,
+              fHfLevel:fHfLevel,
+              room:n.room,
+              description:n.description,
+          })
+      })
+      var finalResult={
+          columns:{
+            name:"نام",
+              building:"ساختمان",
+              fHfLevel:"طبقه / نیم طبقه",
+              room:"اتاق",
+              description:"توضیحات",
+          },
+          locationsData:data
     }
   
       return res.validSend(200, { locations: finalResult });
@@ -158,9 +153,9 @@ export let search_Locations = async (req, res) => {
 export let update_Location = async (req, res) => {
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
     if (!req.validate(["_id"])) return;
-    var {name,description,building,floor,halfFloor,room,_id}=req.body;
+    var {name,description,building,fHf,level,room,_id}=req.body;
    
-    var query = { name,description, building, floor, halfFloor, room };
+    var query = { name,description, building, fHf, level, room };
     try {
       await Location.update({ _id }, query);
       return res.validSend(200, { message: "Update is successful" });
