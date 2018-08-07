@@ -1,5 +1,6 @@
 import NetNode from '../models/NetNode'
 import Location from '../models/Location'
+import Vlan from '../models/Vlan';
 
 /*          POST /api/netnodes/new            */
 export let new_NetNode = async (req, res) => {
@@ -135,9 +136,12 @@ export let search_NetNodes = async (req, res) => {
         
         var finalQuery={$and:[dbQuery,{status:0}]}
         var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
+        var vlans=await Vlan.find({name:{$regex:search,$options:'i'}}).lean();
+        var switches=await Switch.find({name:{$regex:search,$options:'i'}}).lean();
+        var devices=await Device.find({name:{$regex:search,$options:'i'}}).lean();
         console.log("locs",locations)
         locations=locations.map(l=>l._id)
-        if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}})
+        if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}},{vlan:{$in:vlans}},{device:{$in:devices}},{switchId:{$in:switches}})
         // var netNodes = await NetNode.find(dbQuery, { _id: 0 }).
         var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
             populate({ path: "switchId", select:[ "name","_id"] })

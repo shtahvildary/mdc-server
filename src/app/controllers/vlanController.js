@@ -82,45 +82,42 @@ export let search_Vlans = async (req, res) => {
     try {
       var { search } = req.body;
       if (!search) search = "";
+      console.log(search)
       var dbQuery = {
-        $or: [{
+        $or: [
           
-            name:{
+            {name:{
               $regex:search,
               $options:"i",
-            },
-            number: {
+            }},
+            {number: {
               $regex: search,
               $options: "i"
-            },
+            }},
           
+           { ip: {
+              $regex: search,
+              $options: "i"  
+          }},
           
-            ip: {
+            {firstIp: {
               $regex: search,
               $options: "i"
             
-          },
+          }},
           
-            firstIp: {
+            {lastIp: {
               $regex: search,
               $options: "i"
-            
-          },
-          
-            lastIp: {
+            }},
+           { subnetMask: {
               $regex: search,
               $options: "i"
-            },
-            subnetMask: {
-              $regex: search,
-              $options: "i"
-          },
-          description:{
+          }},
+         { description:{
             $regex: search,
             $options: "i"
-        },
-
-        }
+        }}
         ]
       };
       var finalQuery={$and:[dbQuery,{status:0}]}

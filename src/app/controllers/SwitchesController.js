@@ -118,12 +118,7 @@ export let search_Switches = async (req, res) => {
             $options: "i"
           },
         },
-        {
-          diagramUrl: {
-            $regex: search,
-            $options: "i"
-          },
-        },
+       
         // {
         //           location:{ name:{$regex: search,
         //               $options: 'i'}}
@@ -137,7 +132,6 @@ export let search_Switches = async (req, res) => {
       select: "name"
     });
 
-    console.plain(swList);
     var data = [];
     swList.map(n => {
       data.push({
