@@ -19,7 +19,7 @@ export let new_Vlan=async(req,res)=>{
 /*          POST /api/vlans/all            */
 export let all_Vlans=async(req,res)=>{
     try{
-        var vlans= await Vlan.find({});
+        var vlans= await Vlan.find({status:0});
         var data=[]
         vlans.map(n=>{
             data.push({
@@ -57,7 +57,9 @@ export let select_Vlan_byId = async (req, res) => {
 
     try {
       var vlanInfo = await Vlan.findById(req.body._id) .lean();
+      if(res.vlanInfo.status===0)
       return res.validSend(200, { vlanInfo });
+      else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {
       console.error(e);
       return res.validSend(500, { error: e });
@@ -67,7 +69,7 @@ export let select_Vlan_byId = async (req, res) => {
 /*          POST /api/vlans/all/name            */
 export let all_Vlans_Names=async(req,res)=>{
     try{
-        var vlans= await Vlan.find({}).select({name:1}).lean();
+        var vlans= await Vlan.find({status:0}).select({name:1}).lean();
         return res.validSend(200,{vlans});
     }catch(e){
         console.error(e);
@@ -172,4 +174,22 @@ export let update_Vlan = async (req, res) => {
       return res.validSend(500, { error: e });
     }
   };
+
+  /*          POST /api/vlans/delete            */
+
+// {"arrayOfIds":["5b554f952e3eb30b1890d638"]}
+
+export let delete_vlan=async(req,res)=>{
+    if(!req.validate(["arrayOfIds"]))return;
+var { arrayOfIds } = req.body;
+            
+    try{
+        await Vlan.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
+        return res.validSend(200,{message:"delete is successful"});
+
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
   

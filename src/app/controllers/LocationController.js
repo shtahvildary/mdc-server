@@ -58,14 +58,16 @@ export let select_Location_byId = async (req, res) => {
   try {
     var locationInfo = await Location.findById(req.body._id) .lean();
     console.plain("locationInfo: ",locationInfo)
+    if(res.locationInfo.status===0)
     return res.validSend(200, { locationInfo });
+    else return res.validSend(500, { error: "nothing to return..." });
   } catch (e) {
     console.error(e);
     return res.validSend(500, { error: e });
   }
 };
 
-// /*          POST /api/locations/all/name            */
+/*          POST /api/locations/all/name            */
 export let all_Locations_Names=async(req,res)=>{
     try{
         var locations= await Location.find({status:0}).select({name:1}).lean();
@@ -88,27 +90,32 @@ export let search_Locations = async (req, res) => {
             name:{
               $regex:search,
               $options:"i",
-            },
+            }
+          },
+          {
             building: {
               $regex: search,
               $options: "i"
             }
-          ,
+          },
+          {
             description: {
               $regex: search,
               $options: "i"
             }
-          ,
+          },
+          {
             level: {
               $regex: search,
               $options: "i"
-          },
+          }
+        },
+        {
             room: {
               $regex: search,
               $options: "i"
             }
-            
-          } 
+          }  
         ]
       };
       var finalQuery={$and:[dbQuery,{status:0}]}
@@ -164,4 +171,23 @@ export let update_Location = async (req, res) => {
       return res.validSend(500, { error: e });
     }
   };
+
+  /*          POST /api/switches/delete            */
+
+// {"arrayOfIds":["5b554f952e3eb30b1890d638"]}
+
+export let delete_location=async(req,res)=>{
+  if(!req.validate(["arrayOfIds"]))return;
+var { arrayOfIds } = req.body;
+console.plain(arrayOfIds)
+          
+  try{
+      await Location.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
+      return res.validSend(200,{message:"delete is successful"});
+
+  }catch(e){
+      console.error(e);
+      return res.validSend(500,{error:e});
+  }
+}
   

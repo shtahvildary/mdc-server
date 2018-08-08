@@ -3,9 +3,9 @@ import Device from '../models/Device'
 /*          POST /api/devices/new            */
 export let new_Device=async(req,res)=>{
     if(!req.validate(["name","deviceType"]))return;
-    var {name,ip,description,deviceType,model,code,managementUrl,specialProperties,department}=req.body;
+    var {name,ip,description,deviceType,model,code,specialProperties,department}=req.body;
     try{
-        var dev=new Device({name,ip,description,deviceType,model,code,managementUrl,specialProperties,department});
+        var dev=new Device({name,ip,description,deviceType,model,code,specialProperties,department});
         var savedDevice=await dev.save();
         return res.validSend(200,{device:savedDevice});
 
@@ -45,7 +45,6 @@ export let all_Devices=async(req,res)=>{
                 deviceTypeName:n.deviceType.name,
                 model:n.model,
                 code:n.code,
-                managementUrl:n.managementUrl,
                 departmentName:n.department.name,
 
                 deviceTypeId:n.deviceType._id,
@@ -81,7 +80,9 @@ export let select_Device_byId = async (req, res) => {
     try {
         console.plain(req.body._id)
       var deviceInfo = await Device.findById(req.body._id).populate({path:"deviceType",select:"name"}) .lean();
+      if(res.deviceInfo.status===0)
       return res.validSend(200, { deviceInfo });
+      else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {
       console.error(e);
       return res.validSend(500, { error: e });
@@ -93,6 +94,23 @@ export let all_Devices_Names=async(req,res)=>{
     try{
         var devices= await Device.find({status:0}).select({name:1}).lean();
         return res.validSend(200,{devices});
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
+
+  /*          POST /api/devices/delete            */
+// {"arrayOfIds":["5b554f952e3eb30b1890d638"]}
+
+export let delete_device=async(req,res)=>{
+    if(!req.validate(["arrayOfIds"]))return;
+var { arrayOfIds } = req.body;
+            
+    try{
+        await Device.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
+        return res.validSend(200,{message:"delete is successful"});
+
     }catch(e){
         console.error(e);
         return res.validSend(500,{error:e});

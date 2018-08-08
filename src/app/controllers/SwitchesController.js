@@ -1,9 +1,10 @@
 import Switch from "../models/Switch";
+import Location from "../models/Location";
 
 /*          POST /api/switches/new            */
 export let new_Switch = async (req, res) => {
   if (!req.validate(["name", "model"])) return;
-  var { name, ip, description, model, diagramUrl, location } = req.body;
+  var { name, ip, description, model, diagramUrl, location,code } = req.body;
   try {
     var sw = new Switch({
       name,
@@ -11,7 +12,8 @@ export let new_Switch = async (req, res) => {
       description,
       model,
       diagramUrl,
-      location
+      location,
+      code,
     });
     var savedSW = await sw.save();
     return res.validSend(200, { switch: savedSW });
@@ -30,14 +32,17 @@ export let all_Switches = async (req, res) => {
     });
     var data = [];
     swList.map(n => {
+      var location="";
+      if(n.location) location=n.location
       data.push({
         _id: n._id,
         name: n.name,
         ip: n.ip,
-        description: n.description,
         model: n.model,
         diagramUrl: n.diagramUrl,
-        locationName: n.location.name
+        locationName: location.name,
+        code:n.code,
+        description: n.description,        
       });
     });
 
@@ -45,10 +50,11 @@ export let all_Switches = async (req, res) => {
       columns: {
         name: "نام",
         ip: "آدرس",
-        description: "توضیحات",
         model: "مدل",
         diagramUrl: "نمودار",
-        locationName: "مکان"
+        locationName: "مکان",
+        code:"شماره اموال",
+        description: "توضیحات",
       },
       switchesData: data
     };
@@ -79,7 +85,9 @@ export let select_Switche_byId = async (req, res) => {
   try {
     var switchInfo = await Switch.findById(req.body._id).populate({path:"location",select:["name"]})
       .lean();
+      if(res.switchInfo.status===0)
     return res.validSend(200, { switchInfo });
+    else return res.validSend(500, { error: "nothing to return..." });
   } catch (e) {
     console.error(e);
     return res.validSend(500, { error: e });
@@ -118,22 +126,28 @@ export let search_Switches = async (req, res) => {
             $options: "i"
           },
         },
-       
-        // {
-        //           location:{ name:{$regex: search,
-        //               $options: 'i'}}
-        // }
+        {
+          code: {
+            $regex: search,
+            $options: "i"
+          },
+        },
       ]
     };
     var finalQuery={$and:[dbQuery,{status:0}]}
+    var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
+    if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}})
 
     var swList = await Switch.find(finalQuery, { _id: 0 }).populate({
       path: "location",
       select: "name"
     });
 
+    
     var data = [];
     swList.map(n => {
+      var location="";
+    if(n.location)location=n.location
       data.push({
         _id: n._id,
         name: n.name,
@@ -141,7 +155,8 @@ export let search_Switches = async (req, res) => {
         description: n.description,
         model: n.model,
         diagramUrl: n.diagramUrl,
-        locationName: n.location.name
+        locationName: location.name,
+        code:n.code,
       });
     });
 
@@ -149,10 +164,11 @@ export let search_Switches = async (req, res) => {
       columns: {
         name: "نام",
         ip: "آدرس",
-        description: "توضیحات",
         model: "مدل",
         diagramUrl: "نمودار",
-        locationName: "مکان"
+        locationName: "مکان",
+        code:"شماره اموال",
+        description: "توضیحات",
       },
       switchesData: data
     };
@@ -169,8 +185,8 @@ export let search_Switches = async (req, res) => {
 export let update_Switch = async (req, res) => {
   // router.post("/update", auth, upload.single('logo'),function(req, res) {
   if (!req.validate(["_id"])) return;
-  var { name, ip, description, model, diagramUrl, location, _id } = req.body;
-  var query = { name, ip, description, model, diagramUrl, location };
+  var { name, ip, description, model, diagramUrl, location, _id,code } = req.body;
+  var query = { name, ip, description, model, diagramUrl, location,code };
   try {
     await Switch.update({ _id }, query);
     return res.validSend(200, { message: "Update is successful" });
@@ -179,3 +195,22 @@ export let update_Switch = async (req, res) => {
     return res.validSend(500, { error: e });
   }
 };
+
+/*          POST /api/switches/delete            */
+
+// {"arrayOfIds":["5b554f952e3eb30b1890d638"]}
+
+export let delete_switch=async(req,res)=>{
+  if(!req.validate(["arrayOfIds"]))return;
+var { arrayOfIds } = req.body;
+console.plain(arrayOfIds)
+          
+  try{
+      await Switch.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
+      return res.validSend(200,{message:"delete is successful"});
+
+  }catch(e){
+      console.error(e);
+      return res.validSend(500,{error:e});
+  }
+}

@@ -5,8 +5,8 @@ var locationSchema=mongoose.Schema({
     building:{type:'string'},
     // floor:{type:'string'},
     // halfFloor:{type:'string'},
-    fHf:{type:'number'},//0:floor or 1:half floor
-    level:{type:'number'},
+    fHf:{type:'string'},//0:floor or 1:half floor
+    level:{type:'string'},
     room:{type:'string'},
   });
 locationSchema.plugin(mongooseTimestamp);
