@@ -12,12 +12,10 @@ export let new_NetNode = async (req, res) => {
         var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location });
         var netNode = await nNode.save();
         return res.validSend(200, { netNode });
-
     } catch (e) {
         console.error(e);
         return res.validSend(500, { error: e });
     } 
-
 }
 
 /*          POST /api/netnodes/all            */
@@ -28,37 +26,26 @@ export let all_NetNodes = async (req, res) => {
             .populate({ path: "vlan", select: ["name","_id" ]})
             .populate({ path: "device", select: [ "name","_id"]})
             .populate({ path: "location", select: [ "name","_id"] })
-            // .populate({ path: "rackroom", select: [ "name","_id"] });
-        // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
-            console.plain("n: ", n)
-            var vlan,device,location="";
-            if(n.vlan)vlan=n.vlan
-            if(n.device)device=n.device
-            if(n.location)vlan=n.location
+                
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
                 switchName: n.switchId.name,
                 switchPort: n.switchPort,
-                vlanName: vlan.name,
-                deviceName: device.name,
+                vlanName:n.vlan?(n.vlan.name):"",
+                deviceName:n.device?(n.device.name):"",
+                locationName:n.location?(n.location.name):"",
                 descriptionName: n.description,
-                locationName: location.name,
-                // rackroomName: n.rackroom.name,
 
                 switchId:n.switchId._id,
-                vlanId:vlan._id,
-                deviceId:device._id,
-                locationId:location._id,
-                // rackroomId:n.rackroom._id,
-            })
-            
-
+                vlanId:n.vlan?(n.vlan._id):"",
+                deviceId:n.device?(n.device._id):"",
+                locationId:n.location?(n.location._id):"",
+            })          
         })
-
         var finalResult = {
             columns: {
                 patchPanelPort: "شماره patch panel",
@@ -69,7 +56,6 @@ export let all_NetNodes = async (req, res) => {
                 deviceName: "نوع",
                 description: "توضیحات",
                 locationName: "مکان",
-                // rackroomName:"رک روم",
             },
             netNodesData: data
         }
@@ -117,24 +103,16 @@ export let search_NetNodes = async (req, res) => {
                         $options: 'i'
                     },
                 }, {
-                    // switch: {$regex: search,
-                    //     $options: 'i'},
                     "switchPort": {
                         $regex: search,
                         $options: 'i'
                     },
                 }, {
-                    // vlan:{$regex: search,
-                    //     $options: 'i'},
-                    // device:{$regex: search,
-                    //     $options: 'i'},
                     "description": {
                         $regex: search,
                         $options: 'i'
                     },
                 },
-                
-
             ]
         }
         
@@ -143,21 +121,17 @@ export let search_NetNodes = async (req, res) => {
         var vlans=await Vlan.find({name:{$regex:search,$options:'i'}}).lean();
         var switches=await Switch.find({name:{$regex:search,$options:'i'}}).lean();
         var devices=await Device.find({name:{$regex:search,$options:'i'}}).lean();
-        console.log("locs",locations)
         locations=locations.map(l=>l._id)
         if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}},{vlan:{$in:vlans}},{device:{$in:devices}},{switchId:{$in:switches}})
-        // var netNodes = await NetNode.find(dbQuery, { _id: 0 }).
         var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
             populate({ path: "switchId", select:[ "name","_id"] })
             .populate({ path: "vlan", select: [ "name","_id"] })
             .populate({ path: "device", select: [ "name","_id"] })
             .populate({ path: "location", select: [ "name","_id"] })
-            // .populate({ path: "rackroom", select: [ "name","_id"] });
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
 
-            var vlan,device,location="";
             if(n.vlan)vlan=n.vlan
             if(n.device)device=n.device
             if(n.location)location=n.location
@@ -167,15 +141,15 @@ export let search_NetNodes = async (req, res) => {
                 cableNumber: n.cableNumber,
                 switchName: n.switchId.name,
                 switchPort: n.switchPort,
-                vlanName: vlan.name,
-                deviceName: device.name,
+                vlanName:n.vlan?(n.vlan.name):"",
+                deviceName:n.device?(n.device.name):"",
+                locationName:n.location?(n.location.name):"",
                 descriptionName: n.description,
-                locationName: location.name,
 
                 switchId:n.switchId._id,
-                vlanId:vlan._id,
-                deviceId:device._id,
-                locationId:location._id,
+                vlanId:n.vlan?(n.vlan._id):"",
+                deviceId:n.device?(n.device._id):"",
+                locationId:n.location?(n.location._id):"",
             })
         })
 
@@ -213,8 +187,8 @@ export let update_netNode=async(req,res)=>{
         try{
             await NetNode.update({_id},query)
             return res.validSend(200,{message:"Update is successful"});
-    
-        }catch(e){
+        }
+        catch(e){
             console.error(e);
             return res.validSend(500,{error:e});
         }
@@ -227,8 +201,7 @@ export let update_netNode=async(req,res)=>{
 
 export let delete_netNode=async(req,res)=>{
         if(!req.validate(["arrayOfIds"]))return;
-    var { arrayOfIds } = req.body;
-                
+    var { arrayOfIds } = req.body;       
         try{
             await NetNode.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
             return res.validSend(200,{message:"delete is successful"});
@@ -242,12 +215,10 @@ export let delete_netNode=async(req,res)=>{
 
     export let recover_netNode=async(req,res)=>{
         if(!req.validate(["arrayOfIds"]))return;
-    var { arrayOfIds } = req.body;
-                
+    var { arrayOfIds } = req.body;    
         try{
             await NetNode.update({_id:{ $in : arrayOfIds }},{status:0},{ multi: true})
             return res.validSend(200,{message:"recovery progress is successful"});
-    
         }catch(e){
             console.error(e);
             return res.validSend(500,{error:e});
