@@ -55,10 +55,15 @@ app.use((err,req,res,next)=>{
 const port = process.env.API_PORT || 5000;
 
 
-app.listen(port, (err) => {
+var server=app.listen(port, (err) => {
   if (err) {
     console.error(err)
   }
 
   console.info(`listening on port`, Number(port))
 });
+global.io=require('socket.io').listen(server);
+io.on("connection",(socket)=>{
+  console.log("socket: ",socket.id)
+
+})

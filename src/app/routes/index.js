@@ -13,6 +13,9 @@ import netNodes from './netNodes';
 import vlans from './vlans';
 import deviceTypes from './deviceTypes';
 import departments from './departments';
+import streams from './streams';
+import streamServer from './streamServer' 
+
 
 //USING ROUTES
 routes.use('/users', users);
@@ -24,5 +27,7 @@ routes.use('/netnodes',netNodes);
 routes.use('/vlans',vlans);
 routes.use('/devicetypes',deviceTypes);
 routes.use('/departments',departments);
+routes.use('/streams',streams);
+routes.use('/streamServer',streamServer);
 
 export default routes;
