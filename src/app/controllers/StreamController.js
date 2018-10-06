@@ -32,7 +32,9 @@ export let all_Streams=async(req,res)=>{
                 nameEn:n.name.en,
                 nameFa:n.name.fa,
                 address:n.address,
-                playState:playState,
+                playStateText:playState,
+                playStateValue:n.playState,
+                
                 
             })
 
@@ -42,9 +44,8 @@ export let all_Streams=async(req,res)=>{
         var finalResult={
             columns:{
                 nameFa:"نام فارسی",
-                nameEn:"نام انگلیسی",
-                address:"آدرس",
-                playState:"وضعیت",
+                playStateText:"وضعیت",
+                changePlayState:"تغییر وضعیت",
                 
             },
             streamsData:data
