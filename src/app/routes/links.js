@@ -3,7 +3,7 @@
  * All Device's apis are routed here.
  * 
  */
-const routes=express.Routes();
+const routes=express.Router();
 
 import Auth from '../middlewares/Auth';
 import {newLink,allLinks} from '../controllers/LinksController';

@@ -24,7 +24,6 @@ export let all_Streams=async(req,res)=>{
         var data=[];
         var playState="";
         strList.map(n=>{
-            console.plain('n.name: ',n.name)
             if(n.playState==0) playState="متوقف شده"
             else playState="در حال پخش"
             data.push({
@@ -38,7 +37,6 @@ export let all_Streams=async(req,res)=>{
                 
             })
 
-            console.plain("data......",data)
         })
 
         var finalResult={
@@ -50,7 +48,6 @@ export let all_Streams=async(req,res)=>{
             },
             streamsData:data
         }
-        console.plain("finalResult......",finalResult.streamsData[0].name)
 
         return res.validSend(200,{streams:finalResult})
     }
