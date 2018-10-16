@@ -6,7 +6,7 @@ export let hasChanged=async(req,res)=>{
 try{
 
      io.emit("changes",req.body)
-    console.plain(req.body)
+    console.plain("req: ",req)
     return res.validSend(200,{message:"changes have been sent to clients."})
 }
 catch(e){
