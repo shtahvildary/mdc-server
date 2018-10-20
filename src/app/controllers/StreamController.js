@@ -17,7 +17,8 @@ export let new_Stream = async (req, res) => {
 /*      POST    /api/streams/all      */
 export let all_Streams = async (req, res) => {
   try {
-    var strList = await Stream.find({ status: 0 }).populate({path:"mosaicInputs",select:"name"});
+    var strList = await Stream.find({ status: 0 }).populate({path:"mosaicInputs",select:["name","address"]});
+    console.log("strList: ",strList)
     var data = [];
     var playState = "";
     strList.map(n => {
