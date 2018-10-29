@@ -9,6 +9,14 @@ import tokenize from '../middlewares/Token'
 
 
 /*          POST /api/users/register            */
+/* example:
+{"username" : "admin",
+    "password" : "admin",
+	"fName":"admin",
+	"lName":"admin",
+	"userType":0
+}
+*/
 export let register = async(req, res, next) => {
     //REQUEST VALIDATION
     if (!req.validate(["username", "password"])) return;
@@ -17,7 +25,8 @@ export let register = async(req, res, next) => {
         fName,
         lName,
         username,
-        password
+        password,
+        userType,
     } = req.body;
     //CHECK IF USER ALREADY EXISTS
     if(await User.findOne({username})) return res.validSend(409,{error:"username already exists."});
@@ -26,7 +35,8 @@ export let register = async(req, res, next) => {
         fName,
         lName,
         username,
-        password
+        password,
+        userType,
     });
     try {
         //SAVING USER
