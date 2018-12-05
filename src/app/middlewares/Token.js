@@ -44,7 +44,7 @@ let validationConfig = () => {
  *  @param {string} userid User unique identifier
  *  @param {string} docid Optional- Unique Identifier of basedCollection's document that is related to user. If it's null, this function will find it in database automatically. 
  */
-export default async(userid, docid) => {
+export default async (userid, docid) => {
     //CHECKING TOKENIZATION CONFIG
     var validation = validationConfig();
     if (!validation.valid) return {
@@ -59,7 +59,7 @@ export default async(userid, docid) => {
         userid,
         basedCollection,
         _id: userid
-    },process.env.JWT_SECRET);
+    }, process.env.JWT_SECRET);
     let schema = mongoose.model(basedCollection);
     //IF DOCID IS NOT DEFINED, FIND IT IN BASEDCOLLECTION
     if (!docid) {
@@ -69,38 +69,38 @@ export default async(userid, docid) => {
         if (!doc) return {
             error: "No " + basedCollection + "'s document with passed " + useridKey + " was found."
         }
-        docid=doc._id;
+        docid = doc._id;
     }
     //GENERATING TOKEN
     return await jwt.sign({
         userid,
         basedCollection,
         docid
-    },process.env.JWT_SECRET);
+    }, process.env.JWT_SECRET);
 
 }
 //VERIFYING TOKEN
-export let verify=async(token)=>{
-    try{
+export let verify = async (token) => {
+    try {
         //VERIFYING
-        var authenticationInfo=await jwt.verify(token,process.env.JWT_SECRET);
-        var {basedCollection,userid,docid} =authenticationInfo;
+        var authenticationInfo = await jwt.verify(token, process.env.JWT_SECRET);
+        var { basedCollection, userid, docid } = authenticationInfo;
         //FINDING USER OBJECT
-        var user=await User.findById(userid);
-        var result={user};
+        var user = await User.findById(userid);
+        var result = { user };
 
-        if(basedCollection!='User'){
-         //FINDING BASEDCOLLECTION DOCUMENT
-        var schema=mongoose.model(basedCollection);
-        var doc=await schema.findById(docid);
-        result[basedCollection]=doc;
+        if (basedCollection != 'User') {
+            //FINDING BASEDCOLLECTION DOCUMENT
+            var schema = mongoose.model(basedCollection);
+            var doc = await schema.findById(docid);
+            result[basedCollection] = doc;
         }
         //RETURNING FOUND OBJECTS
         return result
-        
-    }catch(e){
+
+    } catch (e) {
         //INVALID TOKEN
-        return {error:"Token is not valid."}
+        return { error: "Token is not valid." }
     }
 
 }

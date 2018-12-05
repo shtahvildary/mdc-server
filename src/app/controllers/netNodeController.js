@@ -38,7 +38,7 @@ export let all_NetNodes = async (req, res) => {
                 vlanName:n.vlan?(n.vlan.name):"",
                 deviceName:n.device?(n.device.name):"",
                 locationName:n.location?(n.location.name):"",
-                descriptionName: n.description,
+                description: n.description,
 
                 switchId:n.switchId._id,
                 vlanId:n.vlan?(n.vlan._id):"",
@@ -182,6 +182,7 @@ export let update_netNode=async(req,res)=>{
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
         if(!req.validate(["_id"]))return;
     var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
+    console.log("device: ",device)
         
         var query={patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location}
         try{

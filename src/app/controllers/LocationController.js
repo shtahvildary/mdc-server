@@ -23,8 +23,11 @@ export let all_Locations=async(req,res)=>{
         var data=[];
         locList.map(n=>{
           var fHfLevel=""
-          if(n.fHf===0) fHfLevel="طبقه "+n.level
+          console.log("n.fHf: ",n.fHf)
+
+          if(n.fHf==0) fHfLevel="طبقه "+n.level
           else fHfLevel="نیم طبقه "+n.level
+          console.log("fHfLevel: ",fHfLevel)
             data.push({
                 _id:n._id,
                 name:n.name,
