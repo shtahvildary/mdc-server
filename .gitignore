@@ -62,3 +62,5 @@ build/main.map
 build/main.js
 build/main.js
 build/main.map
+package-lock.json
+package-lock.json
