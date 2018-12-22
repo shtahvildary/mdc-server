@@ -60,8 +60,7 @@ export let all_Locations=async(req,res)=>{
 export let select_Location_byId = async (req, res) => {
   try {
     var locationInfo = await Location.findById(req.body._id) .lean();
-    console.plain("locationInfo: ",locationInfo)
-    if(res.locationInfo.status===0)
+    if(locationInfo.status===0)
     return res.validSend(200, { locationInfo });
     else return res.validSend(500, { error: "nothing to return..." });
   } catch (e) {

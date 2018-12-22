@@ -42,7 +42,9 @@ export let all_Switches = async (req, res) => {
         diagramUrl: n.diagramUrl,
         locationName: location.name,
         code:n.code,
-        description: n.description,        
+        description: n.description,    
+        locationId:n.location?(n.location._id):"",
+
       });
     });
 
@@ -157,6 +159,7 @@ export let search_Switches = async (req, res) => {
         diagramUrl: n.diagramUrl,
         locationName: location.name,
         code:n.code,
+
       });
     });
 
