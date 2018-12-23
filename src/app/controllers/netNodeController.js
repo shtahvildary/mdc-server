@@ -33,14 +33,14 @@ export let all_NetNodes = async (req, res) => {
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
-                switchName: n.switchId.name,
                 switchPort: n.switchPort,
+                switchName:n.switchId?( n.switchId.name):"",
                 vlanName:n.vlan?(n.vlan.name):"",
                 deviceName:n.device?(n.device.name):"",
                 locationName:n.location?(n.location.name):"",
                 description: n.description,
 
-                switchId:n.switchId._id,
+                switchId:n.switchId?(n.switchId._id):"",
                 vlanId:n.vlan?(n.vlan._id):"",
                 deviceId:n.device?(n.device._id):"",
                 locationId:n.location?(n.location._id):"",
@@ -48,14 +48,14 @@ export let all_NetNodes = async (req, res) => {
         })
         var finalResult = {
             columns: {
-                patchPanelPort: "شماره patch panel",
-                cableNumber: "شماره کابل",
+                patchPanelPort: "شماره نود",
+                cableNumber: "شماره patch cord",
                 switchName: "سوییچ",
-                switchPort: "شماره پورت سوییچ",
-                vlanName: "شبکه مجازی",
-                deviceName: "نوع",
-                description: "توضیحات",
-                locationName: "مکان",
+                // switchPort: "شماره پورت سوییچ",
+                // vlanName: "شبکه مجازی",
+                // deviceName: "نوع",
+                // description: "توضیحات",
+                // locationName: "مکان",
             },
             netNodesData: data
         }
@@ -67,6 +67,8 @@ export let all_NetNodes = async (req, res) => {
 }
 /*          POST /api/netNodes/select/one            */
 export let select_NetNode_byId = async (req, res) => {
+    console.plain("select input: ",req.body)
+
 
     try {
       var netNodeInfo = await NetNode.findById(req.body._id) 
@@ -132,21 +134,21 @@ export let search_NetNodes = async (req, res) => {
         var data = []
         netNodes.map(n => {
 
-            if(n.vlan)vlan=n.vlan
-            if(n.device)device=n.device
-            if(n.location)location=n.location
+            if(n.vlan)vlans=n.vlan
+            if(n.device)devices=n.device
+            if(n.location)locations=n.location
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
-                switchName: n.switchId.name,
                 switchPort: n.switchPort,
+                switchName: n.switchId?(n.switchId.name):"",
                 vlanName:n.vlan?(n.vlan.name):"",
                 deviceName:n.device?(n.device.name):"",
                 locationName:n.location?(n.location.name):"",
                 descriptionName: n.description,
 
-                switchId:n.switchId._id,
+                switchId:n.switchId?(n.switchId._id):"",
                 vlanId:n.vlan?(n.vlan._id):"",
                 deviceId:n.device?(n.device._id):"",
                 locationId:n.location?(n.location._id):"",
@@ -155,14 +157,14 @@ export let search_NetNodes = async (req, res) => {
 
         var finalResult = {
             columns: {
-                patchPanelPort: "شماره patch panel",
-                cableNumber: "شماره کابل",
+                patchPanelPort: "شماره نود",
+                cableNumber: "شماره patch cord",
                 switchName: "سوییچ",
-                switchPort: "شماره پورت سوییچ",
-                vlanName: "شبکه مجازی",
-                deviceName: "نوع",
-                description: "توضیحات",
-                locationName: "مکان",
+                // switchPort: "شماره پورت سوییچ",
+                // vlanName: "شبکه مجازی",
+                // deviceName: "نوع",
+                // description: "توضیحات",
+                // locationName: "مکان",
             },
             netNodesData: data
         }
@@ -188,6 +190,28 @@ export let update_netNode=async(req,res)=>{
         try{
             await NetNode.update({_id},query)
             return res.validSend(200,{message:"Update is successful"});
+        }
+        catch(e){
+            console.error(e);
+            return res.validSend(500,{error:e});
+        }
+    }
+
+
+    /*          POST /api/netnodes/disconnect            */
+
+export let disconnect_netNode=async(req,res)=>{
+    // router.post("/disconnect", auth, upload.single('logo'),function(req, res) {
+        console.plain("disconnect input: ",req.body)
+        if(!req.validate(["_id"]))return;
+    var { _id } = req.body;
+    var { cableNumber, switchId, switchPort, vlan, device, description, location } = "";
+    console.log("device: ",device)
+        
+        var query={ cableNumber, switchId, switchPort, vlan, device, description, location}
+        try{
+            await NetNode.update({_id},query)
+            return res.validSend(200,{message:"Disconnection is successful"});
         }
         catch(e){
             console.error(e);
