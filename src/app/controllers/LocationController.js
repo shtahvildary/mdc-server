@@ -42,9 +42,9 @@ export let all_Locations=async(req,res)=>{
             columns:{
               name:"نام",
                 building:"ساختمان",
-                fHfLevel:"طبقه / نیم طبقه",
-                room:"اتاق",
-                description:"توضیحات",
+                // fHfLevel:"طبقه / نیم طبقه",
+                // room:"اتاق",
+                // description:"توضیحات",
             },
             locationsData:data
         }
@@ -143,9 +143,9 @@ export let search_Locations = async (req, res) => {
           columns:{
             name:"نام",
               building:"ساختمان",
-              fHfLevel:"طبقه / نیم طبقه",
-              room:"اتاق",
-              description:"توضیحات",
+              // fHfLevel:"طبقه / نیم طبقه",
+              // room:"اتاق",
+              // description:"توضیحات",
           },
           locationsData:data
     }

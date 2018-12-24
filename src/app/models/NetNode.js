@@ -1,7 +1,7 @@
 
 var netNodeSchema=mongoose.Schema({
   status:{type:Number,default:0}, //0:active  , -1:deleted  
-    patchPanelPort:{type:'string'},
+    patchPanelPort:{type:'string',unique:true},
     cableNumber:{type:'string'},
     // switchName:{}
     switchId:{type:mongoose.SchemaTypes.ObjectId,ref:'Switch'},

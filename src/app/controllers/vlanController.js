@@ -35,13 +35,13 @@ export let all_Vlans=async(req,res)=>{
         })
         var finalResult={
             columns:{
-                name:"نام",
-                number:"شماره",
-                ip:"آی پی",
-                firstIp:"اولین آی پی",
-                lastIp:"آخرین آی پی",
-                subnetMask:"subnet mask",
-                description:"توضیحات",
+                name:"Name",
+                number:"Number",
+                ip:"IP",
+                // firstIp:"First IP",
+                // lastIp:"Last IP",
+                // subnetMask:"subnet mask",
+                // description:"Description",
             },
             vlansData:data,
         }
@@ -142,13 +142,13 @@ export let search_Vlans = async (req, res) => {
     })
     var finalResult={
         columns:{
-            name:"نام",
-            number:"شماره",
-            ip:"آی پی",
-            firstIp:"اولین آی پی",
-            lastIp:"آخرین آی پی",
-            subnetMask:"subnet mask",
-            description:"توضیحات",
+            name:"Name",
+            number:"Number",
+            ip:"IP",
+            // firstIp:"First IP",
+            // lastIp:"Last IP",
+            // subnetMask:"subnet mask",
+            // description:"Description",
         },
         vlansData:data,
     }

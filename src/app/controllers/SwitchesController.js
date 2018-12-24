@@ -53,10 +53,10 @@ export let all_Switches = async (req, res) => {
         name: "نام",
         ip: "آدرس",
         model: "مدل",
-        diagramUrl: "نمودار",
-        locationName: "مکان",
-        code:"شماره اموال",
-        description: "توضیحات",
+        diagramUrl: "گراف",
+        // locationName: "مکان",
+        // code:"شماره اموال",
+        // description: "توضیحات",
       },
       switchesData: data
     };
@@ -168,10 +168,10 @@ export let search_Switches = async (req, res) => {
         name: "نام",
         ip: "آدرس",
         model: "مدل",
-        diagramUrl: "نمودار",
-        locationName: "مکان",
-        code:"شماره اموال",
-        description: "توضیحات",
+        diagramUrl: "'گراف'",
+        // locationName: "مکان",
+        // code:"شماره اموال",
+        // description: "توضیحات",
       },
       switchesData: data
     };
