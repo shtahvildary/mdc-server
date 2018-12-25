@@ -9,42 +9,42 @@ export let new_NetNode = async (req, res) => {
     if (!req.validate(["patchPanelPort"])) return;
     var { patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
     try {
-        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location });    
+        var nNode = new NetNode({ patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location });
         var netNode = await nNode.save();
         return res.validSend(200, { netNode });
     } catch (e) {
         console.error(e);
         return res.validSend(500, { error: e });
-    } 
+    }
 }
 
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
     try {
-        var netNodes = await NetNode.find({status:0}).
-            populate({ path: "switchId", select:[ "name","_id"] })
-            .populate({ path: "vlan", select: ["name","_id" ]})
-            .populate({ path: "device", select: [ "name","_id"]})
-            .populate({ path: "location", select: [ "name","_id"] })
+        var netNodes = await NetNode.find({ status: 0 }).
+            populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
         var data = []
         netNodes.map(n => {
-                
+
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
                 switchPort: n.switchPort,
-                switchName:n.switchId?( n.switchId.name):"",
-                vlanName:n.vlan?(n.vlan.name):"",
-                deviceName:n.device?(n.device.name):"",
-                locationName:n.location?(n.location.name):"",
+                switchName: n.switchId ? (n.switchId.name) : "",
+                vlanName: n.vlan ? (n.vlan.name) : "",
+                deviceName: n.device ? (n.device.name) : "",
+                locationName: n.location ? (n.location.name) : "",
                 description: n.description,
 
-                switchId:n.switchId?(n.switchId._id):"",
-                vlanId:n.vlan?(n.vlan._id):"",
-                deviceId:n.device?(n.device._id):"",
-                locationId:n.location?(n.location._id):"",
-            })          
+                switchId: n.switchId ? (n.switchId._id) : "",
+                vlanId: n.vlan ? (n.vlan._id) : "",
+                deviceId: n.device ? (n.device._id) : "",
+                locationId: n.location ? (n.location._id) : "",
+            })
         })
         var finalResult = {
             columns: {
@@ -67,24 +67,21 @@ export let all_NetNodes = async (req, res) => {
 }
 /*          POST /api/netNodes/select/one            */
 export let select_NetNode_byId = async (req, res) => {
-    console.plain("select input: ",req.body)
-
-
     try {
-      var netNodeInfo = await NetNode.findById(req.body._id) 
-      .populate({ path: "switchId", select:[ "name","_id"] })
-      .populate({ path: "vlan", select: ["name","_id" ]})
-      .populate({ path: "device", select: [ "name","_id"]})
-      .populate({ path: "location", select: [ "name","_id"] })
-        .lean();
-        if(res.netNodeInfo.status===0)
-      return res.validSend(200, { netNodeInfo });
-      else return res.validSend(500, { error: "nothing to return..." });
+        var netNodeInfo = await NetNode.findById(req.body._id)
+            .populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
+            .lean();
+        if (res.netNodeInfo.status === 0)
+            return res.validSend(200, { netNodeInfo });
+        else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {
-      console.error(e);
-      return res.validSend(500, { error: e });
+        console.error(e);
+        return res.validSend(500, { error: e });
     }
-  };
+};
 
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
@@ -117,41 +114,41 @@ export let search_NetNodes = async (req, res) => {
                 },
             ]
         }
-        
-        var finalQuery={$and:[dbQuery,{status:0}]}
-        var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
-        var vlans=await Vlan.find({name:{$regex:search,$options:'i'}}).lean();
-        var switches=await Switch.find({name:{$regex:search,$options:'i'}}).lean();
-        var devices=await Device.find({name:{$regex:search,$options:'i'}}).lean();
-        locations=locations.map(l=>l._id)
-        if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}},{vlan:{$in:vlans}},{device:{$in:devices}},{switchId:{$in:switches}})
+
+        var finalQuery = { $and: [dbQuery, { status: 0 }] }
+        var locations = await Location.find({ name: { $regex: search, $options: 'i' } }).lean();
+        var vlans = await Vlan.find({ name: { $regex: search, $options: 'i' } }).lean();
+        var switches = await Switch.find({ name: { $regex: search, $options: 'i' } }).lean();
+        var devices = await Device.find({ name: { $regex: search, $options: 'i' } }).lean();
+        locations = locations.map(l => l._id)
+        if (locations.length > 0) dbQuery["$or"].push({ location: { $in: locations } }, { vlan: { $in: vlans } }, { device: { $in: devices } }, { switchId: { $in: switches } })
         var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
-            populate({ path: "switchId", select:[ "name","_id"] })
-            .populate({ path: "vlan", select: [ "name","_id"] })
-            .populate({ path: "device", select: [ "name","_id"] })
-            .populate({ path: "location", select: [ "name","_id"] })
+            populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
         // console.plain(netNodes)
         var data = []
         netNodes.map(n => {
 
-            if(n.vlan)vlans=n.vlan
-            if(n.device)devices=n.device
-            if(n.location)locations=n.location
+            if (n.vlan) vlans = n.vlan
+            if (n.device) devices = n.device
+            if (n.location) locations = n.location
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
                 cableNumber: n.cableNumber,
                 switchPort: n.switchPort,
-                switchName: n.switchId?(n.switchId.name):"",
-                vlanName:n.vlan?(n.vlan.name):"",
-                deviceName:n.device?(n.device.name):"",
-                locationName:n.location?(n.location.name):"",
+                switchName: n.switchId ? (n.switchId.name) : "",
+                vlanName: n.vlan ? (n.vlan.name) : "",
+                deviceName: n.device ? (n.device.name) : "",
+                locationName: n.location ? (n.location.name) : "",
                 descriptionName: n.description,
 
-                switchId:n.switchId?(n.switchId._id):"",
-                vlanId:n.vlan?(n.vlan._id):"",
-                deviceId:n.device?(n.device._id):"",
-                locationId:n.location?(n.location._id):"",
+                switchId: n.switchId ? (n.switchId._id) : "",
+                vlanId: n.vlan ? (n.vlan._id) : "",
+                deviceId: n.device ? (n.device._id) : "",
+                locationId: n.location ? (n.location._id) : "",
             })
         })
 
@@ -180,74 +177,102 @@ export let search_NetNodes = async (req, res) => {
 
 /*          POST /api/netnodes/update            */
 
-export let update_netNode=async(req,res)=>{
+export let update_netNode = async (req, res) => {
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
-        if(!req.validate(["_id"]))return;
-    var { _id,patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
-    console.log("device: ",device)
-        
-        var query={patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location}
-        try{
-            await NetNode.update({_id},query)
-            return res.validSend(200,{message:"Update is successful"});
-        }
-        catch(e){
-            console.error(e);
-            return res.validSend(500,{error:e});
-        }
+    if (!req.validate(["_id"])) return;
+    var { _id, patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
+    var query = { patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location }
+    try {
+        await NetNode.update({ _id }, query)
+        return res.validSend(200, { message: "Update is successful" });
     }
+    catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
 
 
-    /*          POST /api/netnodes/disconnect            */
+/*          POST /api/netnodes/disconnect            */
 
-export let disconnect_netNode=async(req,res)=>{
+export let disconnect_netNode = async (req, res) => {
     // router.post("/disconnect", auth, upload.single('logo'),function(req, res) {
-        console.plain("disconnect input: ",req.body)
-        if(!req.validate(["_id"]))return;
+    if (!req.validate(["_id"])) return;
     var { _id } = req.body;
     var { cableNumber, switchId, switchPort, vlan, device, description, location } = "";
-    console.log("device: ",device)
-        
-        var query={ cableNumber, switchId, switchPort, vlan, device, description, location}
-        try{
-            await NetNode.update({_id},query)
-            return res.validSend(200,{message:"Disconnection is successful"});
-        }
-        catch(e){
-            console.error(e);
-            return res.validSend(500,{error:e});
-        }
+    var query = { cableNumber, switchId, switchPort, vlan, device, description, location }
+    try {
+        await NetNode.update({ _id }, query)
+        return res.validSend(200, { message: "Disconnection is successful" });
     }
+    catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
 
 
 /*          POST /api/netnodes/delete            */
 
 // {"arrayOfIds":["5b554f952e3eb30b1890d638"]}
 
-export let delete_netNode=async(req,res)=>{
-        if(!req.validate(["arrayOfIds"]))return;
-    var { arrayOfIds } = req.body;       
-        try{
-            await NetNode.update({_id:{ $in : arrayOfIds }},{status:1},{ multi: true})
-            return res.validSend(200,{message:"delete is successful"});
-    
-        }catch(e){
-            console.error(e);
-            return res.validSend(500,{error:e});
-        }
+export let delete_netNode = async (req, res) => {
+    if (!req.validate(["arrayOfIds"])) return;
+    var { arrayOfIds } = req.body;
+    try {
+        await NetNode.update({ _id: { $in: arrayOfIds } }, { status: 1 }, { multi: true })
+        return res.validSend(200, { message: "delete is successful" });
+
+    } catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
     }
+}
 /*          POST /api/netnodes/recover            */
 
-    export let recover_netNode=async(req,res)=>{
-        if(!req.validate(["arrayOfIds"]))return;
-    var { arrayOfIds } = req.body;    
-        try{
-            await NetNode.update({_id:{ $in : arrayOfIds }},{status:0},{ multi: true})
-            return res.validSend(200,{message:"recovery progress is successful"});
-        }catch(e){
-            console.error(e);
-            return res.validSend(500,{error:e});
-        }
+export let recover_netNode = async (req, res) => {
+    if (!req.validate(["arrayOfIds"])) return;
+    var { arrayOfIds } = req.body;
+    try {
+        await NetNode.update({ _id: { $in: arrayOfIds } }, { status: 0 }, { multi: true })
+        return res.validSend(200, { message: "recovery progress is successful" });
+    } catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
     }
- 
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+
+// JUST FOR INITIALIZATION
+/*          POST /api/netnodes/hiNetNode            */
+
+export let init_netNode = async (req, res) => {
+   
+
+    try {
+        var patchPanelPortArray = []
+        var netNodes = [];
+        for (var i = 1; i <= 10; i++) {
+            for (var j = 1; j <= 24; j++) {
+                patchPanelPortArray.push("R" + i + "P" + j)
+            }
+        }
+        console.plain("patchPanelPortArray: ", patchPanelPortArray)
+
+        patchPanelPortArray.map(patchPanelPort => {
+            // console.plain("patchPanelPort: ", patchPanelPort)
+            var nNode = new NetNode({ patchPanelPort });
+            var netNode =  nNode.save();
+            netNodes.push(netNode);
+        })
+        return res.validSend(200, { netNodes });
+    } catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
+
+
 

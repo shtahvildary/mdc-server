@@ -10,7 +10,10 @@ import { new_DeviceType ,all_DeviceTypes,all_DeviceTypes_Names} from '../control
 
 
 //ENDPOINTS
-routes.post('/new',Auth, new_DeviceType);
+routes.post('/new',Auth,(req,res,next)=>{
+    const requiredPermissions=[107];
+    return checkPermissions(requiredPermissions,req,res,next);
+}, new_DeviceType);
 routes.post('/all',Auth, all_DeviceTypes);
 routes.post('/all/names',Auth, all_DeviceTypes_Names);
 
