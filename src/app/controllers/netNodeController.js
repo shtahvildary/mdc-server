@@ -243,6 +243,71 @@ export let recover_netNode = async (req, res) => {
 }
 
 
+/*          POST /api/netnodes/PRTG            */
+export let prtg_NetNodes = async (req, res) => {
+    try {
+        
+        var { switchName,switchPort } = req.body;
+        
+        
+        // var finalQuery = { $and: [dbQuery, { status: 0 }] }
+        // var locations = await Location.find({ name: { $regex: search, $options: 'i' } }).lean();
+        // var vlans = await Vlan.find({ name: { $regex: search, $options: 'i' } }).lean();
+        var switches = await Switch.find({ name: switchName }).lean();
+        // var devices = await Device.find({ name: { $regex: search, $options: 'i' } }).lean();
+        // locations = locations.map(l => l._id)
+        //  if (locations.length > 0) dbQuery["$or"].push({ location: { $in: locations } }, { vlan: { $in: vlans } }, { device: { $in: devices } }, { switchId: { $in: switches } })
+        var netNodes = await NetNode.find({ switchId: { $in: switches } ,switchPort,status:0}, { _id: 0 }).
+            populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
+        var data = []
+        netNodes.map(n => {
+
+            // if (n.vlan) vlans = n.vlan
+            if (n.device) devices = n.device
+            if (n.location) locations = n.location
+            data.push({
+                _id: n._id,
+                patchPanelPort: n.patchPanelPort,
+                cableNumber: n.cableNumber,
+                switchPort: n.switchPort,
+                switchName: n.switchId ? (n.switchId.name) : "",
+                vlanName: n.vlan ? (n.vlan.name) : "",
+                deviceName: n.device ? (n.device.name) : "",
+                locationName: n.location ? (n.location.name) : "",
+                descriptionName: n.description,
+
+                switchId: n.switchId ? (n.switchId._id) : "",
+                vlanId: n.vlan ? (n.vlan._id) : "",
+                deviceId: n.device ? (n.device._id) : "",
+                locationId: n.location ? (n.location._id) : "",
+            })
+        })
+
+        var finalResult = {
+            columns: {
+                patchPanelPort: "شماره نود",
+                cableNumber: "شماره patch cord",
+                switchName: "سوییچ",
+                // switchPort: "شماره پورت سوییچ",
+                // vlanName: "شبکه مجازی",
+                // deviceName: "نوع",
+                // description: "توضیحات",
+                // locationName: "مکان",
+            },
+            netNodesData: data
+        }
+        return res.validSend(200, { netNodes: finalResult });
+
+    }
+    catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 // JUST FOR INITIALIZATION
