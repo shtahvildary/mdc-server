@@ -301,11 +301,17 @@ export let init_netNode = async (req, res) => {
 
     try {
         var patchPanelPortArray = []
+        var I,K="";
         var netNodes = [];
         for (var i = 1; i <= 10; i++) {
-            for (var j = 1; j <= 24; j++) {
-                patchPanelPortArray.push("R" + i + "P" + j)
+            for (var j = 1; j <= 8; j++) {
+                for (var k = 1; k<= 24; k++) {
+
+                i<10?(I='0'+i.toString()):I=i
+                k<10?(K='0'+k.toString()):K=k
+                patchPanelPortArray.push("R" + I+ "P" +j+ K)
             }
+        }
         }
         console.plain("patchPanelPortArray: ", patchPanelPortArray)
 
