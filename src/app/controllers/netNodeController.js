@@ -51,7 +51,7 @@ export let all_NetNodes = async (req, res) => {
                 patchPanelPort: "شماره نود",
                 cableNumber: "شماره patch cord",
                 switchName: "سوییچ",
-                // switchPort: "شماره پورت سوییچ",
+                switchPort: "شماره پورت سوییچ",
                 // vlanName: "شبکه مجازی",
                 // deviceName: "نوع",
                 // description: "توضیحات",
@@ -155,9 +155,9 @@ export let search_NetNodes = async (req, res) => {
         var finalResult = {
             columns: {
                 patchPanelPort: "شماره نود",
-                cableNumber: "شماره patch cord",
+                switchPort: "شماره patch cord",
                 switchName: "سوییچ",
-                // switchPort: "شماره پورت سوییچ",
+                switchPort: "شماره پورت سوییچ",
                 // vlanName: "شبکه مجازی",
                 // deviceName: "نوع",
                 // description: "توضیحات",
