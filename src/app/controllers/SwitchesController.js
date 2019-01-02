@@ -5,6 +5,7 @@ import Location from "../models/Location";
 export let new_Switch = async (req, res) => {
   if (!req.validate(["name", "model"])) return;
   var { name, ip, description, model, diagramUrl, location,code } = req.body;
+  console.plain("req.body: ", req.body)
   try {
     var sw = new Switch({
       name,
@@ -16,6 +17,7 @@ export let new_Switch = async (req, res) => {
       code,
     });
     var savedSW = await sw.save();
+    console.plain("savedSW: ",savedSW)
     return res.validSend(200, { switch: savedSW });
   } catch (e) {
     console.error(e);
