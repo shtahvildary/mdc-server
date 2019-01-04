@@ -178,6 +178,7 @@ export let search_NetNodes = async (req, res) => {
 /*          POST /api/netnodes/update            */
 
 export let update_netNode = async (req, res) => {
+    console.log("req.body: ",req.body)
     // router.post("/update", auth, upload.single('logo'),function(req, res) {
     if (!req.validate(["_id"])) return;
     var { _id, patchPanelPort, cableNumber, switchId, switchPort, vlan, device, description, location } = req.body;
@@ -313,11 +314,11 @@ export let init_netNode = async (req, res) => {
             }
         }
         }
-        console.plain("patchPanelPortArray: ", patchPanelPortArray)
+        // console.plain("patchPanelPortArray: ", patchPanelPortArray)
 
         patchPanelPortArray.map(patchPanelPort => {
             // console.plain("patchPanelPort: ", patchPanelPort)
-            var nNode = new NetNode({ patchPanelPort });
+            var nNode = new NetNode({ patchPanelPort,location:null });
             var netNode =  nNode.save();
             netNodes.push(netNode);
         })

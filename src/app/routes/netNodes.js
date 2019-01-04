@@ -12,13 +12,17 @@ import {new_NetNode,all_NetNodes,select_NetNode_byId,search_NetNodes,update_netN
 //ENDPOINTS
 routes.post('/new',Auth,(req,res,next)=>{
     const requiredPermissions=[101];
+    if (req.user.userType > 1)
     return checkPermissions(requiredPermissions,req,res,next);
+    return next();
 },new_NetNode);
 routes.post('/all',Auth,all_NetNodes);
 routes.post('/search',Auth,search_NetNodes);
 routes.post('/update',Auth,(req,res,next)=>{
     const requiredPermissions=[201];
+    if (req.user.userType > 1)
     return checkPermissions(requiredPermissions,req,res,next);
+    return next();
 },update_netNode);
 routes.post('/disconnect',Auth,disconnect_netNode);
 routes.post('/delete',Auth,delete_netNode);

@@ -10,8 +10,9 @@ import {new_Department,all_Departments,all_Departments_Names} from '../controlle
 
 //ENDPOINTS
 routes.post('/new',Auth,(req,res,next)=>{
-    const requiredPermissions=[108];
-    return checkPermissions(requiredPermissions,req,res,next);
+    if (req.user.userType > 1)
+    return checkPermissions([108],req,res,next);
+    return next();
 },new_Department);
 routes.post('/all',Auth,all_Departments);
 routes.post('/all/names',Auth,all_Departments_Names);

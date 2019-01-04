@@ -11,13 +11,17 @@ import {new_Location,all_Locations,select_Location_byId,all_Locations_Names,sear
 //ENDPOINTS
 routes.post('/new',Auth,(req,res,next)=>{
     const requiredPermissions=[103];
+    if (req.user.userType > 1)
     return checkPermissions(requiredPermissions,req,res,next);
+    return next();
 },new_Location);
 routes.post('/all',Auth,all_Locations);
 routes.post('/search',Auth,search_Locations);
 routes.post('/update',Auth,(req,res,next)=>{
     const requiredPermissions=[203];
+    if (req.user.userType > 1)
     return checkPermissions(requiredPermissions,req,res,next);
+    return next();
 },update_Location);
 routes.post('/all/names',Auth,all_Locations_Names);
 routes.post('/select/one',Auth,select_Location_byId);

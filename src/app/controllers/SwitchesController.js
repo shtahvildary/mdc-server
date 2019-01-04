@@ -188,6 +188,8 @@ export let search_Switches = async (req, res) => {
 /*          POST /api/switches/update            */
 
 export let update_Switch = async (req, res) => {
+  console.plain("req.body: ",req.body)
+
   // router.post("/update", auth, upload.single('logo'),function(req, res) {
   if (!req.validate(["_id"])) return;
   var { name, ip, description, model, diagramUrl, location, _id,code } = req.body;
