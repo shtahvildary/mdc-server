@@ -14,7 +14,8 @@ import vlans from './vlans';
 import deviceTypes from './deviceTypes';
 import departments from './departments';
 import streams from './streams';
-import streamServer from './streamServer' 
+import streamServer from './streamServer'; 
+import permissions from './permissions'; 
 
 
 //USING ROUTES
@@ -29,5 +30,6 @@ routes.use('/devicetypes',deviceTypes);
 routes.use('/departments',departments);
 routes.use('/streams',streams);
 routes.use('/streamServer',streamServer);
+routes.use('/permissions',permissions);
 
 export default routes;
