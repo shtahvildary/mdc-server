@@ -27,7 +27,9 @@ export let register = async(req, res, next) => {
         username,
         password,
         userType,
+        permissions,
     } = req.body;
+    console.plain("user permissions: ",req.body)
     //CHECK IF USER ALREADY EXISTS
     if(await User.findOne({username})) return res.validSend(409,{error:"username already exists."});
     //CREATING NEW USER OBJECT
@@ -37,6 +39,7 @@ export let register = async(req, res, next) => {
         username,
         password,
         userType,
+        permissions,
     });
     try {
         //SAVING USER
