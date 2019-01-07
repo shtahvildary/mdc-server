@@ -11,7 +11,8 @@ import {
 	login,
 	me,
 	update_me,
-	update_others
+	update_others,
+	all_Users,
 } from '../controllers/UsersController'
 
 //ENDPOINTS
@@ -20,6 +21,7 @@ routes.post('/login', login);
 routes.post('/me', Auth, me);
 routes.post('/me/update', Auth, update_me);
 routes.post('/others/update', Auth, update_others);
+routes.post('/all', Auth, all_Users);
 
 
 

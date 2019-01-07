@@ -130,3 +130,38 @@ export let update_others=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+
+export let all_Users=async(req,res)=>{
+    try{
+        
+        var users=await User.find({$and:[{status:0},{userType:{$gte:1}}]});
+        var data=[];
+        var userType;
+        users.map(n=>{
+            switch (n.userType){
+                case 1: userType="گروه مدیران"; break;
+                case 2: userType="گروه کاربران"; break;
+            }
+            data.push({
+                _id:n._id,
+                fName:n.fName,
+                lName:n.lName,
+                // userType:n.userType,
+                userType:userType,
+                permissions:n.permissions
+
+            })
+            var finalResult={
+                columns:{
+                    fName:'نام',
+                    lName:'نام خانوادگی',
+                    userType:'گروه کاربری',
+                },usersData:data,
+            }
+            return res.validSend(200,{users:finalResult})
+        })
+    }catch(e){
+        console.error(e);
+        return res.validSend(500,{error:e});
+    }
+}
