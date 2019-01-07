@@ -269,17 +269,29 @@ export let prtg_NetNodes = async (req, res) => {
             // if (n.vlan) vlans = n.vlan
             if (n.device) devices = n.device
             if (n.location) locations = n.location
+            // data={
+            //     _id: n._id,
+            //     patchPanelPort: n.patchPanelPort,
+            //     cableNumber: n.cableNumber,
+            //     switchPort: n.switchPort,
+            //     switchName: n.switchId ? (n.switchId.name) : "",
+            //     vlanName: n.vlan ? (n.vlan.name) : "",
+            //     deviceName: n.device ? (n.device.name) : "",
+            //     locationName: n.location ? (n.location.name) : "",
+            //     descriptionName: n.description,
+            // }
             data={
-                _id: n._id,
-                patchPanelPort: n.patchPanelPort,
-                cableNumber: n.cableNumber,
-                switchPort: n.switchPort,
-                switchName: n.switchId ? (n.switchId.name) : "",
-                vlanName: n.vlan ? (n.vlan.name) : "",
-                deviceName: n.device ? (n.device.name) : "",
-                locationName: n.location ? (n.location.name) : "",
-                descriptionName: n.description,
+                
+                "شماره نود": n.patchPanelPort,
+                
+                "شماره پورت سوییچ": n.switchPort,
+                "نام سوییچ": n.switchId ? (n.switchId.name) : "",
+                "VLAN": n.vlan ? (n.vlan.name) : "",
+                "وسیله": n.device ? (n.device.name) : "",
+                "مکان": n.location ? (n.location.name) : "",
+                "توضیحات": n.description,
             }
+
         })
 
        
