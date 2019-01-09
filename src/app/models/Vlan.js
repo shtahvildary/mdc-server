@@ -7,6 +7,7 @@ var vlanSchema = mongoose.Schema({
   firstIp:{type:'string'}, 
   lastIp:{type:'string'}, 
   subnetMask:{type:'string'}, 
+  diagramUrl:{type:'string'},
   description:{type:'string'},
 });
 vlanSchema.plugin(mongooseTimestamp);

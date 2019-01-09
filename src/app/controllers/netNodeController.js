@@ -316,7 +316,7 @@ export let init_netNode = async (req, res) => {
         var patchPanelPortArray = []
         var I,K="";
         var netNodes = [];
-        for (var i = 1; i <= 10; i++) {
+        for (var i = 0 ; i <= 10; i++) {
             for (var j = 1; j <= 8; j++) {
                 for (var k = 1; k<= 24; k++) {
 

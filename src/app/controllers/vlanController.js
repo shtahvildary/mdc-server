@@ -3,9 +3,9 @@ import Vlan from '../models/Vlan'
 /*          POST /api/vlans/new            */
 export let new_Vlan=async(req,res)=>{
     if(!req.validate(["number"]))return;
-    var {number,name,ip,firstIp,lastIp,subnetMask,description}=req.body;
+    var {number,name,ip,firstIp,lastIp,subnetMask,diagramUrl,description}=req.body;
     try{
-        var virtualLan=new Vlan({number,name,ip,firstIp,lastIp,subnetMask,description});
+        var virtualLan=new Vlan({number,name,ip,firstIp,lastIp,subnetMask,diagramUrl,description});
         var VLAN=await virtualLan.save();
         return res.validSend(200,{vlan:VLAN});
 
@@ -30,6 +30,7 @@ export let all_Vlans=async(req,res)=>{
                 firstIp:n.firstIp,
                 lastIp:n.lastIp,
                 subnetMask:n.subnetMask,
+                diagramUrl:n.diagramUrl,
                 description:n.description
             })
         })
@@ -38,6 +39,7 @@ export let all_Vlans=async(req,res)=>{
                 name:"Name",
                 number:"Number",
                 ip:"IP",
+                diagramUrl:"graph",
                 // firstIp:"First IP",
                 // lastIp:"Last IP",
                 // subnetMask:"subnet mask",
@@ -137,6 +139,7 @@ export let search_Vlans = async (req, res) => {
             firstIp:n.firstIp,
             lastIp:n.lastIp,
             subnetMask:n.subnetMask,
+            diagramUrl:n.diagramUrl,
             description:n.description
         })
     })
@@ -145,6 +148,7 @@ export let search_Vlans = async (req, res) => {
             name:"Name",
             number:"Number",
             ip:"IP",
+            diagramUrl:"graph",
             // firstIp:"First IP",
             // lastIp:"Last IP",
             // subnetMask:"subnet mask",
@@ -163,9 +167,9 @@ export let search_Vlans = async (req, res) => {
 
 export let update_Vlan = async (req, res) => {
     if (!req.validate(["_id"])) return;
-    var {_id,number,name,ip,firstIp,lastIp,subnetMask,description}=req.body;
+    var {_id,number,name,ip,firstIp,lastIp,subnetMask,diagramUrl,description}=req.body;
    
-    var query = { number,name,ip, firstIp, lastIp, subnetMask ,description};
+    var query = { number,name,ip, firstIp, lastIp, subnetMask ,diagramUrl,description};
     try {
       await Vlan.update({ _id }, query);
       return res.validSend(200, { message: "Update is successful" });
