@@ -65,6 +65,47 @@ export let all_NetNodes = async (req, res) => {
         return res.validSend(500, { error: e });
     }
 }
+
+export let all_NetNodes_deatails = async (req, res) => {
+    try {
+        var netNodes = await NetNode.find({ status: 0 }).
+            populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
+        var data = []
+        netNodes.map(n => {
+        //     var details = "شماره نود" + n.patchPanelPort + "\n" +
+        //     "شماره patch cord" + n.cableNumber + "\n" +
+        //     "شماره پورت سوییچ" + n.switchPort + "\n" +
+        //     "سوییچ" + n.switchId ? (n.switchId.name) : "" + "\n" +
+        //         "شبکه مجازی" + n.vlan ? (n.vlan.name) : "" + "\n" +
+        //             "نوع" + n.device ? (n.device.name) : "",
+        // "مکان" + n.location ? (n.location.name) : "" + "\n" +
+        //     "توضیحات" + n.description
+            data.push({
+                summary:n.patchPanelPort,
+                details:{
+                // _id: n._id,
+                "شماره نود": n.patchPanelPort,
+                "شماره patch cord": n.cableNumber,
+                "شماره پورت سوییچ": n.switchPort,
+                "سوییچ": n.switchId ? (n.switchId.name) : "",
+                "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
+                "نوع": n.device ? (n.device.name) : "",
+                "مکان": n.location ? (n.location.name) : "",
+                "توضیحات": n.description,
+                }
+                
+            })
+        })
+        
+        return res.validSend(200, { netNodes: data });
+    } catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
 /*          POST /api/netNodes/select/one            */
 export let select_NetNode_byId = async (req, res) => {
     try {
