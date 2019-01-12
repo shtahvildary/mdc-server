@@ -126,7 +126,7 @@ export let search_Vlans = async (req, res) => {
       };
       var finalQuery={$and:[dbQuery,{status:0}]}
   
-      var vlans = await Vlan.find(finalQuery, { _id: 0 })
+      var vlans = await Vlan.find(finalQuery)
   
       console.plain(vlans);
       var data = [];

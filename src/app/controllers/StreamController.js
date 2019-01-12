@@ -114,7 +114,7 @@ export let search_Streams = async (req, res) => {
     };
     var finalQuery = { $and: [dbQuery, { status: 0 }] };
 
-    var strList = await Stream.find(finalQuery, { _id: 0 });
+    var strList = await Stream.find(finalQuery);
 
     var data = [];
     var playState = "";

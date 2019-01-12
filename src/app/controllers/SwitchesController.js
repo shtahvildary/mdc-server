@@ -142,7 +142,7 @@ export let search_Switches = async (req, res) => {
     var locations=await Location.find({name:{$regex:search,$options:'i'}}).lean();
     if(locations.length>0)dbQuery["$or"].push({location:{$in:locations}})
 
-    var swList = await Switch.find(finalQuery, { _id: 0 }).populate({
+    var swList = await Switch.find(finalQuery).populate({
       path: "location",
       select: "name"
     });

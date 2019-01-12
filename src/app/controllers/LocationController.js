@@ -122,7 +122,7 @@ export let search_Locations = async (req, res) => {
       };
       var finalQuery={$and:[dbQuery,{status:0}]}
   
-      var locList = await Location.find(finalQuery, { _id: 0 })
+      var locList = await Location.find(finalQuery)
       console.plain(locList);
       var data = [];
       locList.map(n => {

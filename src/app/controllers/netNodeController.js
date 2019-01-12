@@ -163,7 +163,7 @@ export let search_NetNodes = async (req, res) => {
         var devices = await Device.find({ name: { $regex: search, $options: 'i' } }).lean();
         locations = locations.map(l => l._id)
         if (locations.length > 0) dbQuery["$or"].push({ location: { $in: locations } }, { vlan: { $in: vlans } }, { device: { $in: devices } }, { switchId: { $in: switches } })
-        var netNodes = await NetNode.find(finalQuery, { _id: 0 }).
+        var netNodes = await NetNode.find(finalQuery).
             populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
