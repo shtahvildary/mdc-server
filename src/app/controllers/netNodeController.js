@@ -306,37 +306,38 @@ export let prtg_NetNodes = async (req, res) => {
             .populate({ path: "location", select: ["name", "_id"] })
         var data ;
         netNodes.map(n => {
+            console.log("n: ",n)
 
             // if (n.vlan) vlans = n.vlan
             if (n.device) devices = n.device
-            if (n.location) locations = n.location
-            // data={
-            //     _id: n._id,
-            //     patchPanelPort: n.patchPanelPort,
-            //     cableNumber: n.cableNumber,
-            //     switchPort: n.switchPort,
-            //     switchName: n.switchId ? (n.switchId.name) : "",
-            //     vlanName: n.vlan ? (n.vlan.name) : "",
-            //     deviceName: n.device ? (n.device.name) : "",
-            //     locationName: n.location ? (n.location.name) : "",
-            //     descriptionName: n.description,
-            // }
+            // if (n.location) locations = n.location
             data={
-                
-                "شماره نود": n.patchPanelPort,
-                
-                "شماره پورت سوییچ": n.switchPort,
-                "نام سوییچ": n.switchId ? (n.switchId.name) : "",
-                "VLAN": n.vlan ? (n.vlan.name) : "",
-                "وسیله": n.device ? (n.device.name) : "",
-                "مکان": n.location ? (n.location.name) : "",
-                "توضیحات": n.description,
+                // _id: n._id,
+                patchPanelPort: n.patchPanelPort,
+                cableNumber: n.cableNumber,
+                switchPort: n.switchPort,
+                switchName: n.switchId ? (n.switchId.name) : "",
+                vlanName: n.vlan ? (n.vlan.name) : "",
+                deviceName: n.device ? (n.device.name) : "",
+                locationName: n.location ? (n.location.name) : "",
+                description: n.description,
             }
+            // data={
+                
+            //     "شماره نود": n.patchPanelPort,
+                
+            //     "شماره پورت سوییچ": n.switchPort,
+            //     "نام سوییچ": n.switchId ? (n.switchId.name) : "",
+            //     "VLAN": n.vlan ? (n.vlan.name) : "",
+            //     "وسیله": n.device ? (n.device.name) : "",
+            //     "مکان": n.location ? (n.location.name) : "",
+            //     "توضیحات": n.description,
+            // }
 
         })
 
        
-        return res.validSend(200, { data });
+        return res.validSend(200,  data );
 
     }
     catch (e) {
