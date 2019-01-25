@@ -5,6 +5,7 @@ export let new_Department=async(req,res)=>{
     if(!req.validate(["name"])) return;
     var {name,description,locations,phones}=req.body;
     try{
+        console.plain("req.body: ",req.body)
         var dep=new Department({name,description,locations,phones});
         var savedDepartment=await dep.save();
         return res.validSend(200,{department:savedDepartment})

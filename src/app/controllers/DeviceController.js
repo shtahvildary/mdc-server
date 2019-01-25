@@ -80,7 +80,7 @@ export let select_Device_byId = async (req, res) => {
     try {
         console.plain(req.body._id)
       var deviceInfo = await Device.findById(req.body._id).populate({path:"deviceType",select:"name"}) .lean();
-      if(res.deviceInfo.status===0)
+      if(deviceInfo.status===0)
       return res.validSend(200, { deviceInfo });
       else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {

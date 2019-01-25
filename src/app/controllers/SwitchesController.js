@@ -89,7 +89,7 @@ export let select_Switche_byId = async (req, res) => {
   try {
     var switchInfo = await Switch.findById(req.body._id).populate({path:"location",select:["name"]})
       .lean();
-      if(res.switchInfo.status===0)
+      if(switchInfo.status===0)
     return res.validSend(200, { switchInfo });
     else return res.validSend(500, { error: "nothing to return..." });
   } catch (e) {

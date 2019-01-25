@@ -20,9 +20,10 @@ export let new_NetNode = async (req, res) => {
 
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
+    var {limit,skip}=req.body;
     try {
-        var netNodes = await NetNode.find({ status: 0 }).
-            populate({ path: "switchId", select: ["name", "_id"] })
+        var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
+            .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })
@@ -67,9 +68,10 @@ export let all_NetNodes = async (req, res) => {
 }
 
 export let all_NetNodes_deatails = async (req, res) => {
+    var {limit,skip}=req.body;
     try {
-        var netNodes = await NetNode.find({ status: 0 }).
-            populate({ path: "switchId", select: ["name", "_id"] })
+        var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
+            .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })
@@ -115,7 +117,7 @@ export let select_NetNode_byId = async (req, res) => {
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })
             .lean();
-        if (res.netNodeInfo.status === 0)
+        if (netNodeInfo.status === 0)
             return res.validSend(200, { netNodeInfo });
         else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {
@@ -126,6 +128,7 @@ export let select_NetNode_byId = async (req, res) => {
 
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
+    var {limit,skip}=req.body;
     try {
         var { search } = req.body;
         if (!search) search = "";
@@ -163,8 +166,8 @@ export let search_NetNodes = async (req, res) => {
         var devices = await Device.find({ name: { $regex: search, $options: 'i' } }).lean();
         locations = locations.map(l => l._id)
         if (locations.length > 0) dbQuery["$or"].push({ location: { $in: locations } }, { vlan: { $in: vlans } }, { device: { $in: devices } }, { switchId: { $in: switches } })
-        var netNodes = await NetNode.find(finalQuery).
-            populate({ path: "switchId", select: ["name", "_id"] })
+        var netNodes = await NetNode.find(finalQuery).limit(limit).skip(skip)
+            .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })

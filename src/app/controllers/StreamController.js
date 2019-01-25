@@ -30,6 +30,7 @@ export let all_Streams = async (req, res) => {
         nameFa: n.name.fa,
         address: n.address,
         playStateText: playState,
+        changeStateTime:n.changeStateTime,
         playStateValue: n.playState,
         streamServer: n.streamServer,
         isMosaic:n.isMosaic,
@@ -127,8 +128,11 @@ export let search_Streams = async (req, res) => {
         nameFa: n.name.fa,
         address: n.address,
         playStateText: playState,
+        changeStateTime:n.changeStateTime,
         playStateValue: n.playState,
-        streamServer: n.streamServer
+        streamServer: n.streamServer,
+        isMosaic:n.isMosaic,
+        mosaicInputs:n.mosaicInputs,
       });
     });
 

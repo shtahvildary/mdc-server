@@ -4,10 +4,10 @@ import Stream from "../models/Stream";
 
 export let hasChanged = async (req, res) => {
   try {
-    var { playState } = req.body;
+    var { playState ,changeStateTime} = req.body;
     var _id = req.body.id;
     console.plain("playState:", playState);
-    await Stream.update({ _id }, { playState });
+    await Stream.update({ _id }, { playState ,changeStateTime});
 
     io.emit("changes", req.body);
     console.plain("req: ", req.body);

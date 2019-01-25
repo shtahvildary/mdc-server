@@ -59,7 +59,8 @@ export let select_Vlan_byId = async (req, res) => {
 
     try {
       var vlanInfo = await Vlan.findById(req.body._id) .lean();
-      if(res.vlanInfo.status===0)
+      console.plain("vlanInfo: ",vlanInfo)
+      if(vlanInfo.status===0)
       return res.validSend(200, { vlanInfo });
       else return res.validSend(500, { error: "nothing to return..." });
     } catch (e) {
