@@ -20,7 +20,7 @@ export let new_NetNode = async (req, res) => {
 
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
-    var {limit,skip}=req.body;
+    var {limit,skip,isTable}=req.body;
     try {
         var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
             .populate({ path: "switchId", select: ["name", "_id"] })
@@ -28,8 +28,30 @@ export let all_NetNodes = async (req, res) => {
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })
         var data = []
-        netNodes.map(n => {
-
+        var finalResult;
+        if(!isTable) 
+        {
+        netNodes.map(n => {   
+        data.push({
+            summary:n.patchPanelPort,
+            details:{
+            // _id: n._id,
+            "شماره نود": n.patchPanelPort,
+            "شماره patch cord": n.cableNumber,
+            "شماره پورت سوییچ": n.switchPort,
+            "سوییچ": n.switchId ? (n.switchId.name) : "",
+            "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
+            "نوع": n.device ? (n.device.name) : "",
+            "مکان": n.location ? (n.location.name) : "",
+            "توضیحات": n.description,
+            }
+            
+        })
+    })
+        finalResult={netNodesData: data}
+    }
+        else
+        {netNodes.map(n => {
             data.push({
                 _id: n._id,
                 patchPanelPort: n.patchPanelPort,
@@ -47,7 +69,7 @@ export let all_NetNodes = async (req, res) => {
                 locationId: n.location ? (n.location._id) : "",
             })
         })
-        var finalResult = {
+         finalResult = {
             columns: {
                 patchPanelPort: "شماره نود",
                 cableNumber: "شماره patch cord",
@@ -59,7 +81,7 @@ export let all_NetNodes = async (req, res) => {
                 // locationName: "مکان",
             },
             netNodesData: data
-        }
+        }}
         return res.validSend(200, { netNodes: finalResult });
     } catch (e) {
         console.error(e);
@@ -67,47 +89,48 @@ export let all_NetNodes = async (req, res) => {
     }
 }
 
-export let all_NetNodes_deatails = async (req, res) => {
-    var {limit,skip}=req.body;
-    try {
-        var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
-            .populate({ path: "switchId", select: ["name", "_id"] })
-            .populate({ path: "vlan", select: ["name", "_id"] })
-            .populate({ path: "device", select: ["name", "_id"] })
-            .populate({ path: "location", select: ["name", "_id"] })
-        var data = []
-        netNodes.map(n => {
-        //     var details = "شماره نود" + n.patchPanelPort + "\n" +
-        //     "شماره patch cord" + n.cableNumber + "\n" +
-        //     "شماره پورت سوییچ" + n.switchPort + "\n" +
-        //     "سوییچ" + n.switchId ? (n.switchId.name) : "" + "\n" +
-        //         "شبکه مجازی" + n.vlan ? (n.vlan.name) : "" + "\n" +
-        //             "نوع" + n.device ? (n.device.name) : "",
-        // "مکان" + n.location ? (n.location.name) : "" + "\n" +
-        //     "توضیحات" + n.description
-            data.push({
-                summary:n.patchPanelPort,
-                details:{
-                // _id: n._id,
-                "شماره نود": n.patchPanelPort,
-                "شماره patch cord": n.cableNumber,
-                "شماره پورت سوییچ": n.switchPort,
-                "سوییچ": n.switchId ? (n.switchId.name) : "",
-                "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
-                "نوع": n.device ? (n.device.name) : "",
-                "مکان": n.location ? (n.location.name) : "",
-                "توضیحات": n.description,
-                }
+// export let all_NetNodes_deatails = async (req, res) => {
+//     var {limit,skip}=req.body;
+//     try {
+//         var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
+//             .populate({ path: "switchId", select: ["name", "_id"] })
+//             .populate({ path: "vlan", select: ["name", "_id"] })
+//             .populate({ path: "device", select: ["name", "_id"] })
+//             .populate({ path: "location", select: ["name", "_id"] })
+//         var data = []
+//         netNodes.map(n => {
+//         //     var details = "شماره نود" + n.patchPanelPort + "\n" +
+//         //     "شماره patch cord" + n.cableNumber + "\n" +
+//         //     "شماره پورت سوییچ" + n.switchPort + "\n" +
+//         //     "سوییچ" + n.switchId ? (n.switchId.name) : "" + "\n" +
+//         //         "شبکه مجازی" + n.vlan ? (n.vlan.name) : "" + "\n" +
+//         //             "نوع" + n.device ? (n.device.name) : "",
+//         // "مکان" + n.location ? (n.location.name) : "" + "\n" +
+//         //     "توضیحات" + n.description
+//             data.push({
+//                 summary:n.patchPanelPort,
+//                 details:{
+//                 // _id: n._id,
+//                 "شماره نود": n.patchPanelPort,
+//                 "شماره patch cord": n.cableNumber,
+//                 "شماره پورت سوییچ": n.switchPort,
+//                 "سوییچ": n.switchId ? (n.switchId.name) : "",
+//                 "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
+//                 "نوع": n.device ? (n.device.name) : "",
+//                 "مکان": n.location ? (n.location.name) : "",
+//                 "توضیحات": n.description,
+//                 }
                 
-            })
-        })
+//             })
+//         })
         
-        return res.validSend(200, { netNodes: data });
-    } catch (e) {
-        console.error(e);
-        return res.validSend(500, { error: e });
-    }
-}
+//         return res.validSend(200, { netNodes: data });
+//     } catch (e) {
+//         console.error(e);
+//         return res.validSend(500, { error: e });
+//     }
+// }
+
 /*          POST /api/netNodes/select/one            */
 export let select_NetNode_byId = async (req, res) => {
     try {
@@ -128,7 +151,7 @@ export let select_NetNode_byId = async (req, res) => {
 
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
-    var {limit,skip}=req.body;
+    var {limit,skip,isTable}=req.body;
     try {
         var { search } = req.body;
         if (!search) search = "";
@@ -173,6 +196,29 @@ export let search_NetNodes = async (req, res) => {
             .populate({ path: "location", select: ["name", "_id"] })
         // console.plain(netNodes)
         var data = []
+        var finalResult;
+        if(!isTable) 
+        {
+        netNodes.map(n => {   
+        data.push({
+            summary:n.patchPanelPort,
+            details:{
+            // _id: n._id,
+            "شماره نود": n.patchPanelPort,
+            "شماره patch cord": n.cableNumber,
+            "شماره پورت سوییچ": n.switchPort,
+            "سوییچ": n.switchId ? (n.switchId.name) : "",
+            "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
+            "نوع": n.device ? (n.device.name) : "",
+            "مکان": n.location ? (n.location.name) : "",
+            "توضیحات": n.description,
+            }
+            
+        })
+    })
+        finalResult={netNodesData: data}
+    }
+        else{
         netNodes.map(n => {
 
             if (n.vlan) vlans = n.vlan
@@ -209,6 +255,7 @@ export let search_NetNodes = async (req, res) => {
             },
             netNodesData: data
         }
+    }
         return res.validSend(200, { netNodes: finalResult });
 
     }
