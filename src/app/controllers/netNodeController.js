@@ -35,7 +35,7 @@ export let all_NetNodes = async (req, res) => {
         data.push({
             summary:n.patchPanelPort,
             details:{
-            // _id: n._id,
+            _id: n._id,
             "شماره نود": n.patchPanelPort,
             "شماره patch cord": n.cableNumber,
             "شماره پورت سوییچ": n.switchPort,
@@ -49,8 +49,7 @@ export let all_NetNodes = async (req, res) => {
         })
     })
         finalResult={netNodesData: data}
-        if(netNodes.length<limit) finalResult.finished=true
-        else finalResult.finished=false
+        
 
     }
         else
@@ -85,6 +84,8 @@ export let all_NetNodes = async (req, res) => {
             },
             netNodesData: data
         }}
+        if(netNodes.length<limit) finalResult.finished=true
+        else finalResult.finished=false
         console.plain("finalResult: ",finalResult)
         return res.validSend(200, { netNodes: finalResult });
     } catch (e) {
