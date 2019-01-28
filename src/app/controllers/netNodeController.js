@@ -27,8 +27,8 @@ export let all_NetNodes = async (req, res) => {
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
             .populate({ path: "location", select: ["name", "_id"] })
-        var data = []
-        var finalResult;
+            var data = []
+            var finalResult;
         if(!isTable) 
         {
         netNodes.map(n => {   
@@ -49,6 +49,9 @@ export let all_NetNodes = async (req, res) => {
         })
     })
         finalResult={netNodesData: data}
+        if(netNodes.length<limit) finalResult.finished=true
+        else finalResult.finished=false
+
     }
         else
         {netNodes.map(n => {
@@ -82,6 +85,7 @@ export let all_NetNodes = async (req, res) => {
             },
             netNodesData: data
         }}
+        console.plain("finalResult: ",finalResult)
         return res.validSend(200, { netNodes: finalResult });
     } catch (e) {
         console.error(e);
