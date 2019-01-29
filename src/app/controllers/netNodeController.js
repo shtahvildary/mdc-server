@@ -156,6 +156,7 @@ export let select_NetNode_byId = async (req, res) => {
 
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
+    console.plain("req.body:::::::",req.body)
     var {limit,skip,isTable}=req.body;
     try {
         var { search } = req.body;
@@ -261,6 +262,9 @@ export let search_NetNodes = async (req, res) => {
             netNodesData: data
         }
     }
+    // if(netNodes.length<limit) finalResult.finished=true
+    // else finalResult.finished=false
+    // console.plain("finalResult: ",finalResult)
         return res.validSend(200, { netNodes: finalResult });
 
     }
