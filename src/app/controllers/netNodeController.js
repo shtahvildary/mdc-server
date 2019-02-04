@@ -20,6 +20,7 @@ export let new_NetNode = async (req, res) => {
 
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
+    console.plain("req.body: ",req.body)
     var { limit, skip, isTable } = req.body;
     try {
         var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
@@ -86,7 +87,7 @@ export let all_NetNodes = async (req, res) => {
         }
         if (netNodes.length < limit) finalResult.finished = true
         else finalResult.finished = false
-        console.plain("finalResult: ", finalResult)
+        // console.plain("finalResult: ", finalResult)
         return res.validSend(200, { netNodes: finalResult });
     } catch (e) {
         console.error(e);
