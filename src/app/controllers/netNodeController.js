@@ -21,7 +21,10 @@ export let new_NetNode = async (req, res) => {
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
     console.plain("req.body: ",req.body)
-    var { limit, skip, isTable } = req.body;
+    // var { limit, skip, isTable } = req.body;
+    var { page, size, isTable } = req.body;
+    var limit=size;
+    var skip=size*(page-1)
     try {
         var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
             .populate({ path: "switchId", select: ["name", "_id"] })
@@ -158,7 +161,9 @@ export let select_NetNode_byId = async (req, res) => {
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
     console.plain("req.body:::::::", req.body)
-    var { limit, skip, isTable } = req.body;
+    var { page, size, isTable } = req.body;
+    var limit=size;
+    var skip=size*(page-1)
     try {
         var { search } = req.body;
         if (!search) search = "";
