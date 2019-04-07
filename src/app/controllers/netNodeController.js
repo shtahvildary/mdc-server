@@ -267,9 +267,9 @@ export let search_NetNodes = async (req, res) => {
                 netNodesData: data
             }
         }
-        // if(netNodes.length<limit) finalResult.finished=true
-        // else finalResult.finished=false
-        // console.plain("finalResult: ",finalResult)
+        if(netNodes.length<limit) finalResult.finished=true
+        else finalResult.finished=false
+        console.plain("finalResult: ",finalResult)
         return res.validSend(200, { netNodes: finalResult });
 
     }
