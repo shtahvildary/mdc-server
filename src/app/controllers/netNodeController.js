@@ -256,7 +256,7 @@ export let search_NetNodes = async (req, res) => {
             var finalResult = {
                 columns: {
                     patchPanelPort: "شماره نود",
-                    switchPort: "شماره patch cord",
+                    cableNumber: "شماره patch cord",
                     switchName: "سوییچ",
                     switchPort: "شماره پورت سوییچ",
                     // vlanName: "شبکه مجازی",
@@ -270,7 +270,7 @@ export let search_NetNodes = async (req, res) => {
         if(netNodes.length<limit) finalResult.finished=true
         else finalResult.finished=false
         console.plain("finalResult: ",finalResult)
-        return res.validSend(200, { netNodes: finalResult });
+        return res.validSend(200, { netNodes: finalResult ,finished:finalResult.finished});
 
     }
     catch (e) {
