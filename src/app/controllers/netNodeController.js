@@ -20,12 +20,15 @@ export let new_NetNode = async (req, res) => {
 
 /*          POST /api/netnodes/all            */
 export let all_NetNodes = async (req, res) => {
-    console.plain("req.body: ",req.body)
+    // console.plain("req.body: ",req.body)
     // var { limit, skip, isTable } = req.body;
     var { page, size, isTable } = req.body;
+    console.log("page: ",page)
     var limit=size;
     var skip=size*(page-1)
     try {
+        if (page==1)
+        var dataLength=await NetNode.find({status:0}).count()
         var netNodes = await NetNode.find({ status: 0 }).limit(limit).skip(skip)
             .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
@@ -90,6 +93,7 @@ export let all_NetNodes = async (req, res) => {
         }
         if (netNodes.length < limit) finalResult.finished = true
         else finalResult.finished = false
+        finalResult.dataLength=dataLength
         // console.plain("finalResult: ", finalResult)
         return res.validSend(200, { netNodes: finalResult });
     } catch (e) {
