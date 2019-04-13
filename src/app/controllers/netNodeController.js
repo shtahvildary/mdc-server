@@ -160,7 +160,41 @@ export let select_NetNode_byId = async (req, res) => {
         return res.validSend(500, { error: e });
     }
 };
+export let summery_NetNodes = async (req, res) => {
+    
+    try {
+        
+        var netNodes = await NetNode.find({ status: 0 }).sort({"updatedAt":-1}).limit(3)
+            .populate({ path: "switchId", select: ["name", "_id"] })
+            .populate({ path: "vlan", select: ["name", "_id"] })
+            .populate({ path: "device", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] })
+        var data = []
+        var finalResult;
+            netNodes.map(n => {
+                data.push({
+                    summary: n.patchPanelPort,
+                    details: {
+                        _id: n._id,
+                        "شماره نود": n.patchPanelPort,
+                        "شماره patch cord": n.cableNumber,
+                        "شماره پورت سوییچ": n.switchPort,
+                        "سوییچ": n.switchId ? (n.switchId.name) : "",
+                        "شبکه مجازی": n.vlan ? (n.vlan.name) : "",
+                        "نوع": n.device ? (n.device.name) : "",
+                        "مکان": n.location ? (n.location.name) : "",
+                        "توضیحات": n.description,
+                    }
 
+                })
+            })
+            finalResult = { netNodesData: data }
+        return res.validSend(200, { netNodes: finalResult });
+    } catch (e) {
+        console.error(e);
+        return res.validSend(500, { error: e });
+    }
+}
 /*          POST /api/netnodes/search            */
 export let search_NetNodes = async (req, res) => {
     console.plain("req.body:::::::", req.body)
