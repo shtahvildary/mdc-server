@@ -160,11 +160,12 @@ export let select_NetNode_byId = async (req, res) => {
         return res.validSend(500, { error: e });
     }
 };
-export let summery_NetNodes = async (req, res) => {
+export let summary_NetNodes = async (req, res) => {
     
     try {
-        
-        var netNodes = await NetNode.find({ status: 0 }).sort({"updatedAt":-1}).limit(3)
+        var {rowsCount}=req.body;
+        var dataLength = await NetNode.find({ status: 0 }).count()
+        var netNodes = await NetNode.find({ status: 0 }).sort({"updatedAt":-1}).limit(rowsCount)
             .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
@@ -188,8 +189,9 @@ export let summery_NetNodes = async (req, res) => {
 
                 })
             })
-            finalResult = { netNodesData: data }
-        return res.validSend(200, { netNodes: finalResult });
+            finalResult = {  data }
+            finalResult.dataLength=dataLength
+        return res.validSend(200,  finalResult );
     } catch (e) {
         console.error(e);
         return res.validSend(500, { error: e });
