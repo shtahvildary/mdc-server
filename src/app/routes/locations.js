@@ -6,7 +6,7 @@
 const routes=express.Router();
 
 import Auth from '../middlewares/Auth';
-import {new_Location,all_Locations,select_Location_byId,all_Locations_Names,search_Locations,update_Location,delete_location} from '../controllers/LocationController';
+import {new_Location,all_Locations,summary_Locations,select_Location_byId,all_Locations_Names,search_Locations,update_Location,delete_location} from '../controllers/LocationController';
 
 //ENDPOINTS
 routes.post('/new',Auth,(req,res,next)=>{
@@ -16,6 +16,7 @@ routes.post('/new',Auth,(req,res,next)=>{
     return next();
 },new_Location);
 routes.post('/all',Auth,all_Locations);
+routes.post('/summary',Auth,summary_Locations);
 routes.post('/search',Auth,search_Locations);
 routes.post('/update',Auth,(req,res,next)=>{
     const requiredPermissions=[203];

@@ -70,6 +70,41 @@ export let all_Switches = async (req, res) => {
   }
 };
 
+/*          POST /api/switches/summary            */
+export let summary_Switches = async (req, res) => {
+  try {
+    var {rowsCount}=req.body;
+    var dataLength = await Switch.find({ status: 0 }).count()
+
+    var swList = await Switch.find({status:0}).limit(rowsCount).populate({
+      path: "location",
+      select: "name"
+    });
+    var data = [];
+    swList.map(n => {
+      var location="";
+      if(n.location) location=n.location
+      data.push({
+        summary:n.name,
+        details:{
+        _id: n._id,
+        "نام": n.name,
+        "آدرس": n.ip,
+        "مدل": n.model,
+        "گراف": n.diagramUrl,}
+      });
+    });
+
+    var finalResult = {data};
+    finalResult.dataLength=dataLength
+
+    return res.validSend(200, finalResult);
+  } catch (e) {
+    console.error(e);
+    return res.validSend(500, { error: e });
+  }
+};
+
 /*          POST /api/switches/all/name            */
 export let all_SwitchesNames = async (req, res) => {
   try {

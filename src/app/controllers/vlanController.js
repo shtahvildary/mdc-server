@@ -53,6 +53,41 @@ export let all_Vlans=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+/*          POST /api/vlans/summary            */
+
+export let summary_Vlans=async(req,res)=>{
+  try{
+    var {rowsCount}=req.body;
+    var dataLength=await Vlan.find({status:0}).count()
+    var vlans= await Vlan.find({status:0}).limit(rowsCount);
+    var data=[];
+    var finalResult;
+    vlans.map(n=>{
+      data.push({
+        summary:n.name,
+        details:{
+          _id:n._id,
+          "نام":n.name,
+          "شماره":n.number,
+          "آی پی":n.ip,
+          "اولین آی پی":n.firstIp,
+          "آخرین آی پی":n.lastIp,
+          subnetMask:n.subnetMask,
+          "گراف":n.diagramUrl,
+          "توضیحات":n.description
+        }
+      })
+    })
+
+    finalResult={data}
+    finalResult.dataLength=dataLength
+    return res.validSend(200,finalResult);
+  }
+  catch (e) {
+    console.error(e);
+    return res.validSend(500, { error: e });
+}
+}
 
 /*          POST /api/vlans/select/one            */
 export let select_Vlan_byId = async (req, res) => {

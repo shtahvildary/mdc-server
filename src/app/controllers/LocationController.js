@@ -55,7 +55,44 @@ export let all_Locations=async(req,res)=>{
         return res.validSend(500,{error:e});
     }
 }
+/*      POST    /api/locations/summary      */
 
+export let summary_Locations=async(req,res)=>{
+  try{
+    var {rowsCount}=req.body;
+    var dataLength = await Location.find({ status: 0 }).count()
+
+      var locList=await Location.find({status:0}).limit(rowsCount);
+      var data=[];
+      locList.map(n=>{
+        var fHfLevel=""
+        console.log("n.fHf: ",n.fHf)
+
+        if(n.fHf==0) fHfLevel="طبقه "+n.level
+        else fHfLevel="نیم طبقه "+n.level
+        console.log("fHfLevel: ",fHfLevel)
+          data.push({
+            summary:n.name,
+            details:{
+              _id:n._id,
+              "نام":n.name,
+              "ساختمان":n.building,
+              "طبقه/نیم طبقه":fHfLevel,
+              "اتاق":n.room,
+              "توضیحات":n.description,
+            }
+          })
+      })
+
+      var finalResult={data}
+      finalResult.dataLength=dataLength
+      return res.validSend(200,finalResult)
+  }
+  catch(e){
+      console.error(e);
+      return res.validSend(500,{error:e});
+  }
+}
 /*      POST    /api/locations/select/one      */
 export let select_Location_byId = async (req, res) => {
   try {

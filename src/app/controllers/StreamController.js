@@ -55,6 +55,38 @@ export let all_Streams = async (req, res) => {
   }
 };
 
+/*      POST    /api/streams/summary      */
+export let summary_Streams = async (req, res) => {
+  try {
+    var {rowsCount}=req.body;
+    var dataLength = await Stream.find({ status: 0 }).count()
+
+    var strList = await Stream.find({ status: 0 }).limit(rowsCount).populate({path:"mosaicInputs",select:["name","address"]});
+    console.log("strList: ",strList)
+    var data = [];
+    var playState = "";
+    strList.map(n => {
+      if (n.playState == 0) playState = "متوقف شده";
+      else playState = "در حال پخش";
+      data.push({summary:n.nameFa,
+        details:{
+        _id: n._id,
+        "نام فارسی": n.name.fa,  
+        "وضعیت": playState,
+        "سرور استریم": n.streamServer,
+        }
+      });
+    });
+    finalResult = {  data }
+    finalResult.dataLength=dataLength
+
+    return res.validSend(200, finalResult);
+  } catch (e) {
+    console.error(e);
+    return res.validSend(500, { error: e });
+  }
+};
+
 //api for info_stream_client
 /*      POST    /api/streams/client/all      */
 

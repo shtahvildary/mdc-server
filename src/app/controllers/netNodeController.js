@@ -160,6 +160,8 @@ export let select_NetNode_byId = async (req, res) => {
         return res.validSend(500, { error: e });
     }
 };
+/*          POST /api/netnodes/summary            */
+
 export let summary_NetNodes = async (req, res) => {
     
     try {
