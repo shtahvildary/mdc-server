@@ -17,8 +17,14 @@ export let new_Stream = async (req, res) => {
 /*      POST    /api/streams/all      */
 export let all_Streams = async (req, res) => {
   try {
-    var strList = await Stream.find({ status: 0 }).populate({path:"mosaicInputs",select:["name","address"]});
-    console.log("strList: ",strList)
+    var start=Date.now()
+    console.log("start of api",start)
+    var strList = await Stream.find({ status: 0 }).populate({path:"mosaicInputs",select:["name","address"]}).lean();
+    
+    var strListTime=Date.now()
+    console.log("strList time",strListTime,strListTime-start)
+
+    // console.log("strList: ",strList)
     var data = [];
     var playState = "";
     strList.map(n => {
@@ -37,7 +43,8 @@ export let all_Streams = async (req, res) => {
         mosaicInputs:n.mosaicInputs,
       });
     });
-
+    var mapTime=Date.now()
+    console.log("map time",mapTime,mapTime-strListTime)
     var finalResult = {
       columns: {
         nameFa: "نام فارسی",
@@ -47,6 +54,7 @@ export let all_Streams = async (req, res) => {
       },
       streamsData: data
     };
+    
 
     return res.validSend(200, { streams: finalResult });
   } catch (e) {
