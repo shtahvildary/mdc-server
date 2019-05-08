@@ -3,9 +3,9 @@ import Stream from "../models/Stream";
 /*      POST /api/streams/new     */
 export let new_Stream = async (req, res) => {
   if (!req.validate(["name"])) return;
-  var { name, address, streamServer ,isMosaic,mosaicInputs} = req.body;
+  var { name, address, streamServer ,isMosaic,mosaicInputs,mosaicDimensions} = req.body;
   try {
-    var str = new Stream({ name, address, streamServer,isMosaic,mosaicInputs });
+    var str = new Stream({ name, address, streamServer,isMosaic,mosaicInputs,mosaicDimensions });
     var savedStream = await str.save();
     return res.validSend(200, { stream: savedStream });
   } catch (e) {
@@ -41,6 +41,7 @@ export let all_Streams = async (req, res) => {
         streamServer: n.streamServer,
         isMosaic:n.isMosaic,
         mosaicInputs:n.mosaicInputs,
+        mosaicDimensions:n.mosaicDimensions
       });
     });
     var mapTime=Date.now()
@@ -62,6 +63,24 @@ export let all_Streams = async (req, res) => {
     return res.validSend(500, { error: e });
   }
 };
+
+/*          POST /api/streams/all/names            */
+export let all_Streams_Names=async(req,res)=>{
+  try{
+      var strList= await Stream.find({status:0}).select({name:1}).lean();
+      var data = [];
+
+      strList.map(n=>{
+        data.push({
+          _id: n._id,
+          name: n.name.fa})
+      })
+      return res.validSend(200,{streams:data});
+    }catch(e){
+      console.error(e);
+      return res.validSend(500,{error:e});
+  }
+}
 
 /*      POST    /api/streams/summary      */
 export let summary_Streams = async (req, res) => {
@@ -173,6 +192,7 @@ export let search_Streams = async (req, res) => {
         streamServer: n.streamServer,
         isMosaic:n.isMosaic,
         mosaicInputs:n.mosaicInputs,
+        mosaicDimensions:n.mosaicDimensions,
       });
     });
 
