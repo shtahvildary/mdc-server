@@ -91,11 +91,12 @@ export let summary_Streams = async (req, res) => {
     var strList = await Stream.find({ status: 0 }).limit(rowsCount).populate({path:"mosaicInputs",select:["name","address"]});
     console.log("strList: ",strList)
     var data = [];
+    var finalResult;
     var playState = "";
     strList.map(n => {
       if (n.playState == 0) playState = "متوقف شده";
       else playState = "در حال پخش";
-      data.push({summary:n.nameFa,
+      data.push({summary:n.name.fa,
         details:{
         _id: n._id,
         "نام فارسی": n.name.fa,  
