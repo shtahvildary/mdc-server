@@ -213,13 +213,14 @@ export let search_Streams = async (req, res) => {
   }
 };
 
+
 /*          POST /api/streams/update            */
 
 export let update_Stream = async (req, res) => {
   if (!req.validate(["_id"])) return;
 
-  var { _id, name, address, streamServer } = req.body;
-  var query = { name, address, streamServer };
+  var { _id, name, address, streamServer,isMosaic,mosaicInputs,mosaicDimensions } = req.body;
+  var query = { name, address, streamServer,isMosaic,mosaicInputs,mosaicDimensions };
   try {
     await Stream.update({ _id }, query);
     return res.validSend(200, { message: "Update is successful" });
