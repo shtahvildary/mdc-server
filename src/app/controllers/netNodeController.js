@@ -248,7 +248,7 @@ export let search_NetNodes = async (req, res) => {
             .populate({ path: "switchId", select: ["name", "_id"] })
             .populate({ path: "vlan", select: ["name", "_id"] })
             .populate({ path: "device", select: ["name", "_id"] })
-            .populate({ path: "location", select: ["name", "_id"] })
+            .populate({ path: "location", select: ["name", "_id"] }).lean()
         // console.plain(netNodes)
         var data = []
         var finalResult;
@@ -257,7 +257,7 @@ export let search_NetNodes = async (req, res) => {
                 data.push({
                     summary: n.patchPanelPort,
                     details: {
-                        // _id: n._id,
+                        _id: n._id,
                         "شماره نود": n.patchPanelPort,
                         "شماره patch cord": n.cableNumber,
                         "شماره پورت سوییچ": n.switchPort,
